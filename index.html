@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enok Rocha | QA Engineer & Test Automation Specialist</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        #animation-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .bug {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232c3e50' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 6h8'/%3E%3Cpath d='M7 12h10'/%3E%3Cpath d='M8 18h8'/%3E%3Cpath d='M12 3v3'/%3E%3Cpath d='M12 18v3'/%3E%3Cpath d='M3 10v4'/%3E%3Cpath d='M3 10c0-3.5 2.5-6 6-6'/%3E%3Cpath d='M3 14c0 3.5 2.5 6 6 6'/%3E%3Cpath d='M21 10v4'/%3E%3Cpath d='M21 10c0-3.5-2.5-6-6-6'/%3E%3Cpath d='M21 14c0 3.5-2.5 6-6 6'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.7;
+            transition: var(--transition);
+            filter: drop-shadow(0 0 3px rgba(0,0,0,0.3));
+            z-index: 1;
+        }
+        
+        .bug.caught {
+            transform: scale(0.5) rotate(720deg);
+            opacity: 0;
+            filter: brightness(0) invert(0.8) sepia(1) hue-rotate(90deg) saturate(5);
+        }
+        
+        .bug-notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background-color: rgba(39, 174, 96, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            z-index: 100;
+            opacity: 0;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .bug-notification.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+        
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(160deg, rgba(236,240,241,0.9) 0%, rgba(52,152,219,0.8) 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232c3e50' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+        }
+        
+        .header-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            color: var(--dark);
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .role {
+            font-size: 1.6rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .social-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .social-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .github {
+            background-color: #333;
+        }
+        
+        .linkedin {
+            background-color: #0077B5;
+        }
+        
+        .email {
+            background-color: var(--accent);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .about-text {
+            line-height: 1.8;
+        }
+        
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+        
+        .experience-item {
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .company {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        .period {
+            color: #666;
+        }
+        
+        .position {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .responsibilities {
+            list-style: none;
+        }
+        
+        .responsibilities li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        
+        .responsibilities li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .skill-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .skill-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .skill-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        .projects {
+            background-color: #f9f9f9;
+            clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+            padding-top: 8rem;
+            padding-bottom: 8rem;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .project-img {
+            height: 200px;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h2V0h2v20h2V0h2v20h2V0h2v20h2V0h2v20h2v2H20v-1.5zM0 20h2v20H0V20zm4 0h2v20H4V20zm4 0h2v20H8V20zm4 0h2v20h-2V20zm4 0h2v20h-2V20zm4 4h20v2H20v-2zm0 4h20v2H20v-2zm0 4h20v2H20v-2zm0 4h20v2H20v-2z' fill='%23FFFFFF' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-content h3 {
+            margin-bottom: 0.8rem;
+        }
+        
+        .project-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .project-link {
+            padding: 0.5rem 1rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .project-link:hover {
+            background-color: var(--dark);
+        }
+        
+        .education {
+            padding: 5rem 2rem;
+        }
+        
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .education-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .education-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--secondary);
+            border-radius: 0 0 0 10px;
+        }
+        
+        .education-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .education-card .institution {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .education-card .period {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .contact {
+            text-align: center;
+            padding-bottom: 8rem;
+        }
+        
+        .contact p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+        
+        .contact-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+        
+        .contact-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(46, 204, 113, 0.2);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .bug-catcher {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background-color: var(--dark);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 101;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+        
+        .bug-catcher:hover {
+            transform: scale(1.1);
+        }
+        
+        .bug-count {
+            font-size: 1.2rem;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .bug-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background-color: var(--success);
+            transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 0;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .role {
+                font-size: 1.2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            section {
+                padding: 3rem 1.5rem;
+            }
+            
+            section h2 {
+                font-size: 2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .skill-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .projects-grid,
+            .skills-container,
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .bug-catcher {
+                width: 50px;
+                height: 50px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="styles/bug-animation.css">
+</head>
+
+<body>
+
+    <div id="animation-container"></div>
+    <div class="bug-notification">Bug encontrado! +1</div>
+
+<div class="bug-catcher">
+    <div class="bug-count">0/50</div>
+    <div class="bug-progress"></div>
+</div>
+    
+    <header>
+        <div class="header-content">
+            <h1>Enok Rocha</h1>
+            <p class="role">QA Engineer & Test Automation Specialist</p>
+            <p class="tagline">I turn bugs into opportunities for improvement. Specialized in ensuring software quality through efficient testing and intelligent automation. Scroll down to explore my portfolio while catching bugs along the way!</p>
+            
+            <div class="social-links">
+                <a href="https://github.com/enokjanuario" target="_blank" class="social-button github">
+                    GitHub
+                </a>
+                <a href="https://linkedin.com/in/enokjrocha/" target="_blank" class="social-button linkedin">
+                    LinkedIn
+                </a>
+                <a href="mailto:ejrocha07@gmail.com" class="social-button email">
+                    Contact
+                </a>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14"></path>
+                <path d="m19 12-7 7-7-7"></path>
+            </svg>
+        </div>
+    </header>
+    
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>I am a Software Quality Engineer with extensive experience in all phases of the software lifecycle. Since my graduation in Computer Science from UFMG, I have worked in various areas of technology, including user support, development, and software quality.</p>
+                <p>My professional journey has allowed me to work on system testing for companies in basic sanitation, road logistics, Open Finance, non-profit private entities, and platforms managed by the government of Minas Gerais.</p>
+                <p>I am passionate about finding bugs before they find your users. With experience in test automation and agile methodologies, my goal is to ensure that delivered products meet the highest quality standards.</p>
+            </div>
+            <div class="skills-highlight">
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <span class="company">Areas of Expertise</span>
+                    </div>
+                    <ul class="responsibilities">
+                        <li>API Testing (REST, GraphQL)</li>
+                        <li>Manual & Exploratory Testing</li>
+                        <li>Automated Testing (Selenium, Rest-Assured)</li>
+                        <li>Mobile Testing (Appium)</li>
+                        <li>End-to-End Testing</li>
+                        <li>BDD and Gherkin implementation</li>
+                        <li>CI/CD Integration</li>
+                        <li>Test Planning & Strategy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="experience">
+        <h2>Professional Experience</h2>
+        
+        <div class="experience-item">
+            <div class="experience-header">
+                <span class="company">Base2 - Banco Inter</span>
+                <span class="period">October 2024 - Present</span>
+            </div>
+            <div class="position">Automated Test Analyst</div>
+            <ul class="responsibilities">
+                <li>Focal point for Cheque-related demands, working on automation with Rest Assured</li>
+                <li>Focal point for frontend tests, automated using Selenide</li>
+                <li>Daily monitoring of regression tests, identifying environment issues and potential performance improvements</li>
+                <li>Support for TED, Automatic Payment and PBC demands</li>
+                <li>Support and reference for other squad members</li>
+            </ul>
+        </div>
+        
+        <div class="experience-item">
+            <div class="experience-header">
+                <span class="company">OPUS Software</span>
+                <span class="period">June 2024 - October 2024</span>
+            </div>
+            <div class="position">Quality Assurance Engineer III</div>
+            <ul class="responsibilities">
+                <li>Planning and designing test cases, focusing on APIs</li>
+                <li>Improvements in the automation process for regulatory demands of Open Finance and Open Insurance</li>
+                <li>Requirement gathering and enhancement of automated tests</li>
+                <li>Implementation of tests for a Payment Transaction Initiator</li>
+                <li>Building tests in a custom framework based on Gherkin/BDD</li>
+            </ul>
+        </div>
+        
+        <div class="experience-item">
+            <div class="experience-header">
+                <span class="company">OPUS Software</span>
+                <span class="period">November 2022 - June 2024</span>
+            </div>
+            <div class="position">Quality Assurance Engineer II</div>
+            <ul class="responsibilities">
+                <li>Planning and executing API tests using tools like Postman and Swagger</li>
+                <li>Writing automated test resource files</li>
+                <li>Active participation in planning sessions</li>
+                <li>Close collaboration with the development team in a shift-left testing approach</li>
+                <li>Preparing written evidence and reports of executed tests to document the work performed</li>
+            </ul>
+        </div>
+        
+        <div class="experience-item">
+            <div class="experience-header">
+                <span class="company">OPUS Software</span>
+                <span class="period">February 2022 - November 2022</span>
+            </div>
+            <div class="position">Quality Assurance Engineer I</div>
+            <ul class="responsibilities">
+                <li>Use of agile methodologies (Scrum/Kanban) across all areas</li>
+                <li>Responsible for planning and executing test cases, participating in planning meetings for new demands</li>
+                <li>Identifying product quality concerns and providing suggestions for improvements to prevent future issues</li>
+                <li>Main focus on testing BRK Ambiental products: BackOffice System, web recertification system, and property recertification app</li>
+                <li>Execution of API, E2E, and mobile tests</li>
+                <li>Periodic maintenance of test automation in Appium to ensure compliance</li>
+                <li>Manual testing with each step recorded and documented in Jira</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section id="skills">
+        <h2>Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-card">
+                <h3>API Testing</h3>
+                <p>Expert in testing REST and GraphQL APIs using Postman, Swagger, and Rest-Assured. Experience with contract validation, endpoint testing, and performance analysis.</p>
+            </div>
+            
+            <div class="skill-card">
+                <h3>Test Automation</h3>
+                <p>Proficient in building automation frameworks with Selenium, Rest-Assured, and Selenide for web applications and backend services. Experience with custom BDD frameworks.</p>
+            </div>
+            
+            <div class="skill-card">
+                <h3>Mobile Testing</h3>
+                <p>Strong experience with Appium for testing mobile applications on both iOS and Android platforms. Knowledge of mobile-specific testing approaches and challenges.</p>
+            </div>
+            
+            <div class="skill-card">
+                <h3>CI/CD Integration</h3>
+                <p>Integration of automated tests with Jenkins and other CI/CD platforms to ensure continuous quality throughout the development lifecycle.</p>
+            </div>
+            
+            <div class="skill-card">
+                <h3>BDD & Testing Methodologies</h3>
+                <p>Implementation of Behavior-Driven Development using Gherkin syntax. Experienced in various testing methodologies including exploratory testing, regression testing, and shift-left approach.</p>
+            </div>
+            
+            <div class="skill-card">
+                <h3>Tools & Platforms</h3>
+                <p>Proficient with Jira, Git, GitHub, Postman, Swagger, Jenkins, and various test management tools. Experience with Zephyr for test documentation and execution.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="projects" id="projects">
+        <h2>Key Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-img">Open Finance</div>
+                <div class="project-content">
+                    <h3>Open Finance API Testing Framework</h3>
+                    <p>Design and implementation of an automated testing framework for Open Finance regulatory APIs, ensuring compliance and reliability of financial data sharing systems.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-img">Mobile</div>
+                <div class="project-content">
+                    <h3>Property Recertification App</h3>
+                    <p>End-to-end testing suite for a mobile property recertification application using Appium, covering user flows and integration with backend services.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-img">Payment</div>
+                <div class="project-content">
+                    <h3>Payment Transaction Initiator</h3>
+                    <p>Comprehensive test implementation for a payment system, including critical error handling, security validations, and performance under load conditions.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="education" id="education">
+        <h2>Education</h2>
+        <div class="education-grid">
+            <div class="education-card">
+                <h3>Bachelor's Degree in Computer Science</h3>
+                <div class="institution">Universidade Federal de Minas Gerais (UFMG)</div>
+                <div class="period">2016-2021</div>
+                <p>Foundation in computer programming, algorithms, software engineering, and system design principles. Focused on software quality methodologies in final semesters.</p>
+            </div>
+            
+            
+            <div class="education-card">
+                <h3>Professional Certification in Test Automation</h3>
+                <div class="institution">Selenium Masterclass</div>
+                <div class="period">2022</div>
+                <p>Comprehensive training in web automation using Selenium WebDriver, TestNG, and Page Object Model design patterns.</p>
+            </div>
+            
+            
+            <div class="education-card">
+                <h3>API Testing & Automation</h3>
+                <div class="institution">Udemy - Rest Assured Masterclass</div>
+                <div class="period">2023</div>
+                <p>Advanced techniques for API testing automation using Rest-Assured, focusing on RESTful services and GraphQL endpoints.</p>
+            </div>
+            
+        </div>
+        
+        <div style="margin-top: 4rem; text-align: center;">
+            <h3 style="margin-bottom: 1.5rem;">Continuous Learning</h3>
+            <p style="max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                As a professional dedicated to quality assurance, I believe in lifelong learning to stay ahead of industry trends and technologies.
+                I regularly participate in webinars, online courses, and testing communities to expand my knowledge and skills.
+                Currently exploring security testing methodologies and performance testing tools to further enhance my expertise.
+            </p>
+        </div>
+    </section>
+    <script src="js/bug-animation.js"></script>
+</body>
+</html>

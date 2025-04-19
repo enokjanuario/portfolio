@@ -21,13 +21,10 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
         body {
-            color: var(--dark);
-            background-color: var(--light);
-            overflow-x: hidden;
+            background-color: #ecf0f1;
+            background-image: linear-gradient(120deg, #f6f9fc 0%, #ecf0f1 100%);
         }
-        
         #animation-container {
             position: fixed;
             top: 0;
@@ -607,7 +604,7 @@
 
 <body>
 
-    <div id="animation-container"></div>
+    <canvas id="animation-canvas"></canvas>
     <div class="bug-notification">Bug encontrado! +1</div>
 
 <div class="bug-catcher">
@@ -846,6 +843,6 @@
             </p>
         </div>
     </section>
-    <script src="js/bug-animation.js"></script>
+    <script src="js/constellation-animation.js"></script>
 </body>
 </html>

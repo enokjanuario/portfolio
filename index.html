@@ -3,846 +3,1545 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enok Rocha | QA Engineer & Test Automation Specialist</title>
+    <meta name="description" content="Enok Rocha - QA Engineer Portfolio | Software Testing Professional">
+    <meta name="keywords" content="QA Engineer, Software Testing, Automation, Selenium, Quality Assurance">
+    <title>Enok Rocha | Test Automation Analyst</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Modern CSS framework -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Animation libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    
     <style>
         :root {
-            --primary: #3498db;
-            --secondary: #2ecc71;
-            --dark: #2c3e50;
-            --light: #ecf0f1;
-            --accent: #e74c3c;
-            --success: #27ae60;
-            --transition: all 0.3s ease;
+            /* Light mode variables */
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --success: #2ec4b6;
+            --warning: #ff9f1c;
+            --danger: #e71d36;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --background: #ffffff;
+            --background-rgb: 255, 255, 255;
+            --card-bg: #ffffff;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --border-color: #e9ecef;
+            --timeline-color: linear-gradient(90deg, #4361ee, #4cc9f0);
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        [data-theme="dark"] {
+            /* Dark mode variables */
+            --primary: #4cc9f0;
+            --secondary: #7209b7;
+            --accent: #4361ee;
+            --success: #2ec4b6;
+            --warning: #ff9f1c;
+            --danger: #e71d36;
+            --light: #212529;
+            --dark: #f8f9fa;
+            --background: #121212;
+            --background-rgb: 18, 18, 18;
+            --card-bg: #1e1e1e;
+            --text-primary: #f8f9fa;
+            --text-secondary: #adb5bd;
+            --border-color: #343a40;
+            --timeline-color: linear-gradient(90deg, #7209b7, #4cc9f0);
         }
+
         body {
-            background-color: #ecf0f1;
-            background-image: linear-gradient(120deg, #f6f9fc 0%, #ecf0f1 100%);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
         }
-        #animation-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
         }
-        
-        .bug {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232c3e50' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 6h8'/%3E%3Cpath d='M7 12h10'/%3E%3Cpath d='M8 18h8'/%3E%3Cpath d='M12 3v3'/%3E%3Cpath d='M12 18v3'/%3E%3Cpath d='M3 10v4'/%3E%3Cpath d='M3 10c0-3.5 2.5-6 6-6'/%3E%3Cpath d='M3 14c0 3.5 2.5 6 6 6'/%3E%3Cpath d='M21 10v4'/%3E%3Cpath d='M21 10c0-3.5-2.5-6-6-6'/%3E%3Cpath d='M21 14c0 3.5-2.5 6-6 6'/%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.7;
-            transition: var(--transition);
-            filter: drop-shadow(0 0 3px rgba(0,0,0,0.3));
-            z-index: 1;
+
+        /* Modern Component Styles */
+        .section-card {
+            background: var(--card-bg);
+            background-color: rgba(var(--background-rgb), 0.95); /* Aumentar opacidade do fundo */
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 2.5rem auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 1200px;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            border: 1px solid var(--border-color);
         }
-        
-        .bug.caught {
-            transform: scale(0.5) rotate(720deg);
-            opacity: 0;
-            filter: brightness(0) invert(0.8) sepia(1) hue-rotate(90deg) saturate(5);
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
-        
-        .bug-notification {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background-color: rgba(39, 174, 96, 0.9);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: bold;
-            z-index: 100;
-            opacity: 0;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                        opacity 0.3s ease;
-            pointer-events: none;
-        }
-        
-        .bug-notification.show {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-        }
-        
-        header {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            background: linear-gradient(160deg, rgba(236,240,241,0.9) 0%, rgba(52,152,219,0.8) 100%);
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+        /* Timeline */
+        .timeline-container {
             position: relative;
-            overflow: hidden;
+            padding-left: 2rem;
+            margin-bottom: 2.5rem;
+            opacity: 1 !important; /* Garantir visibilidade */
         }
-        
-        header::before {
-            content: '';
+
+        .timeline-line {
             position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--timeline-color);
+            opacity: 1 !important; /* Garantir visibilidade */
+            visibility: visible !important;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            z-index: 1;
+            opacity: 1 !important; /* Garantir visibilidade */
+            visibility: visible !important;
+        }
+
+        /* Skills Pills */
+        .skill-pill {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            margin: 0.25rem;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .skill-pill:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            height: 6px;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        /* Toggle Switch */
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232c3e50' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px var(--primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+
+        /* Animated buttons */
+        .animated-btn {
+            position: relative;
+            overflow: hidden;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .animated-btn:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--secondary);
+            border-radius: 50px;
+            z-index: -2;
+        }
+
+        .animated-btn:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: var(--accent);
+            transition: all 0.3s;
+            border-radius: 50px;
             z-index: -1;
         }
-        
-        .header-content {
-            max-width: 900px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-            color: var(--dark);
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 4px;
-            background: var(--secondary);
-            border-radius: 2px;
-        }
-        
-        .role {
-            font-size: 1.6rem;
-            font-weight: 300;
-            margin-bottom: 2rem;
-            color: var(--dark);
-        }
-        
-        .tagline {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            line-height: 1.6;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .social-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--dark);
+
+        .animated-btn:hover {
             color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: var(--transition);
-            font-weight: 500;
-        }
-        
-        .social-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .github {
-            background-color: #333;
-        }
-        
-        .linkedin {
-            background-color: #0077B5;
-        }
-        
-        .email {
-            background-color: var(--accent);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
+        .animated-btn:hover:before {
+            width: 100%;
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0) translateX(-50%);
-            }
-            40% {
-                transform: translateY(-20px) translateX(-50%);
-            }
-            60% {
-                transform: translateY(-10px) translateX(-50%);
-            }
+        /* Timeline Button */
+        .timeline-btn {
+            background-color: var(--primary) !important;
+            color: white !important;
+            border: none !important;
         }
         
-        section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+        .timeline-btn:hover {
+            background-color: var(--accent) !important;
+            color: white !important;
         }
-        
-        section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            position: relative;
-        }
-        
-        section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            margin-top: 2rem;
-        }
-        
-        .about-text {
-            line-height: 1.8;
-        }
-        
-        .about-text p {
-            margin-bottom: 1rem;
-        }
-        
-        .experience-item {
-            margin-bottom: 2rem;
-            padding: 2rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .experience-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: var(--primary);
-        }
-        
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .company {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--dark);
-        }
-        
-        .period {
-            color: #666;
-        }
-        
-        .position {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-        
-        .responsibilities {
-            list-style: none;
-        }
-        
-        .responsibilities li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
-            line-height: 1.6;
-        }
-        
-        .responsibilities li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
-        }
-        
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .skill-card {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        
-        .skill-card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-        
-        .skill-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-        
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: var(--primary);
-        }
-        
-        .projects {
-            background-color: #f9f9f9;
-            clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
-            padding-top: 8rem;
-            padding-bottom: 8rem;
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
+
+        /* Project Card */
         .project-card {
-            background: white;
-            border-radius: 10px;
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: var(--transition);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            background-color: rgba(var(--background-rgb), 0.95); /* Aumentar opacidade */
         }
-        
+
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
-        
-        .project-img {
+
+        .project-image {
             height: 200px;
             background-color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
+            background-size: cover;
+            background-position: center;
         }
-        
-        .project-img::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h2V0h2v20h2V0h2v20h2V0h2v20h2V0h2v20h2v2H20v-1.5zM0 20h2v20H0V20zm4 0h2v20H4V20zm4 0h2v20H8V20zm4 0h2v20h-2V20zm4 0h2v20h-2V20zm4 4h20v2H20v-2zm0 4h20v2H20v-2zm0 4h20v2H20v-2zm0 4h20v2H20v-2z' fill='%23FFFFFF' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
-        }
-        
+
         .project-content {
             padding: 1.5rem;
+            background: var(--card-bg);
+            background-color: rgba(var(--background-rgb), 0.95); /* Aumentar opacidade */
         }
-        
-        .project-content h3 {
-            margin-bottom: 0.8rem;
+
+        /* Contact form */
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            transition: border-color 0.3s;
         }
-        
-        .project-content p {
-            color: #666;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
         }
-        
-        .project-links {
-            display: flex;
-            gap: 1rem;
+
+        /* Resume section */
+        .resume-container {
+            position: relative;
+            overflow: hidden;
+            height: 500px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
         }
-        
-        .project-link {
-            padding: 0.5rem 1rem;
-            background-color: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            transition: var(--transition);
+
+        .resume-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
-        
-        .project-link:hover {
-            background-color: var(--dark);
+
+        /* Responsive layout */
+        @media (max-width: 768px) {
+            .section-card {
+                padding: 1.5rem;
+                margin: 1.5rem 1rem;
+            }
+            
+            .timeline-container {
+                padding-left: 1.5rem;
+            }
+
+            .project-image {
+                height: 150px;
+            }
         }
-        
-        .education {
-            padding: 5rem 2rem;
-        }
-        
-        .education-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .education-card {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: var(--transition);
+
+        /* Adicionando estilo global para aumentar opacidade de todas as seções */
+        section {
             position: relative;
         }
         
-        .education-card::before {
+        section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 5px;
+            width: 100%;
             height: 100%;
-            background: var(--secondary);
-            border-radius: 0 0 0 10px;
+            background-color: rgba(var(--background-rgb), 0.6); /* Camada semi-transparente */
+            z-index: -1;
         }
         
-        .education-card h3 {
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-        
-        .education-card .institution {
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-        
-        .education-card .period {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 1rem;
-        }
-        
-        .contact {
-            text-align: center;
-            padding-bottom: 8rem;
-        }
-        
-        .contact p {
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            line-height: 1.8;
-        }
-        
-        .contact-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background-color: var(--secondary);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: var(--transition);
-            margin-top: 1rem;
-        }
-        
-        .contact-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(46, 204, 113, 0.2);
-        }
-        
-        footer {
-            background-color: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        footer p {
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
-
-        .bug-catcher {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 60px;
-            height: 60px;
-            background-color: var(--dark);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 101;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: var(--transition);
-            overflow: hidden;
-        }
-        
-        .bug-catcher:hover {
-            transform: scale(1.1);
-        }
-        
-        .bug-count {
-            font-size: 1.2rem;
-            font-weight: bold;
+        #hero {
             position: relative;
-            z-index: 1;
         }
         
-        .bug-progress {
+        #hero::after {
+            content: '';
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
             width: 100%;
-            height: 0%;
-            background-color: var(--success);
-            transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 0;
-            opacity: 0.8;
+            height: 100%;
+            background-color: rgba(var(--background-rgb), 0.8); /* Camada semi-transparente */
+            z-index: -1;
+        }
+
+        /* Mobile menu */
+        #mobile-menu {
+            background-color: rgba(var(--background-rgb), 0.95) !important;
         }
         
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .role {
-                font-size: 1.2rem;
-            }
-            
-            .tagline {
-                font-size: 1rem;
-            }
-            
-            section {
-                padding: 3rem 1.5rem;
-            }
-            
-            section h2 {
-                font-size: 2rem;
-            }
-            
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .skill-card h3 {
-                font-size: 1.3rem;
-            }
-            
-            .projects-grid,
-            .skills-container,
-            .education-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .bug-catcher {
-                width: 50px;
-                height: 50px;
-                font-size: 0.9rem;
-            }
+        /* Contact form inputs com mais opacidade */
+        .form-input {
+            background-color: rgba(var(--background-rgb), 0.95) !important;
         }
     </style>
-    <link rel="stylesheet" href="styles/bug-animation.css">
 </head>
-
-<body>
-
-    <canvas id="animation-canvas"></canvas>
-    <div class="bug-notification">Bug encontrado! +1</div>
-
-<div class="bug-catcher">
-    <div class="bug-count">0/50</div>
-    <div class="bug-progress"></div>
-</div>
-    
-    <header>
-        <div class="header-content">
-            <h1>Enok Rocha</h1>
-            <p class="role">QA Engineer & Test Automation Specialist</p>
-            <p class="tagline">I turn bugs into opportunities for improvement. Specialized in ensuring software quality through efficient testing and intelligent automation. Scroll down to explore my portfolio while catching bugs along the way!</p>
-            
-            <div class="social-links">
-                <a href="https://github.com/enokjanuario" target="_blank" class="social-button github">
-                    GitHub
-                </a>
-                <a href="https://linkedin.com/in/enokjrocha/" target="_blank" class="social-button linkedin">
-                    LinkedIn
-                </a>
-                <a href="mailto:ejrocha07@gmail.com" class="social-button email">
-                    Contact
-                </a>
+<body data-theme="light">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-opacity-80 backdrop-filter backdrop-blur-lg" style="background-color: rgba(var(--background-rgb), 0.95) !important;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-xl font-bold" style="color: var(--primary);">
+                        <span>&lt;</span>Enok<span>/&gt;</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);">About</a>
+                    <a href="#experience" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);">Experience</a>
+                    <a href="#skills" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);">Skills</a>
+                    <a href="#projects" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);">Projects</a>
+                    <a href="#contact" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);">Contact</a>
+                    <label class="theme-switch">
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-blue-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
-        
-        <div class="scroll-indicator">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 5v14"></path>
-                <path d="m19 12-7 7-7-7"></path>
-            </svg>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden" style="background-color: var(--background);">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">About</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Experience</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Skills</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Projects</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Contact</a>
+                <div class="px-3 py-2">
+                    <label class="theme-switch">
+                        <input type="checkbox" id="mobile-theme-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="min-h-screen flex items-center pt-16" style="background-color: var(--background);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="animate__animated animate__fadeInLeft">
+                    <p class="text-lg font-medium mb-2" style="color: var(--primary);">Hi, I'm</p>
+                    <h1 class="text-5xl md:text-6xl font-bold mb-4">Enok Rocha</h1>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">I break things for a living — on purpose.</h2>
+                    <p class="text-xl mb-8" style="color: var(--text-secondary);">Test Automation Analyst with an eye for detail and a passion for delivering flawless software. I transform chaos into quality.</p>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="animated-btn" id="download-resume">
+                            <i class="fas fa-download mr-2"></i> Download Resume
+                        </a>
+                        <a href="#contact" class="animated-btn" style="background-color: var(--secondary);">
+                            <i class="fas fa-envelope mr-2"></i> Contact Me
+                        </a>
+                        <a href="#experience" class="animated-btn timeline-btn" style="background-color: var(--primary); color: white;">
+                            <i class="fas fa-history mr-2"></i> View Timeline
+                        </a>
+                    </div>
+                    
+                    <div class="mt-8 flex items-center">
+                        <a href="https://linkedin.com/in/enokjrocha" target="_blank" class="mr-4 text-2xl hover:text-blue-500 transition-colors" style="color: var(--text-primary);">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/enokjanuario" target="_blank" class="mr-4 text-2xl hover:text-blue-500 transition-colors" style="color: var(--text-primary);">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:ejrocha07@gmail.com" class="text-2xl hover:text-blue-500 transition-colors" style="color: var(--text-primary);">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="animate__animated animate__fadeInRight">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 transform rotate-6 rounded-lg"></div>
+                        <div class="relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg" style="background-color: var(--card-bg);">
+                            <div class="flex items-center mb-4">
+                                <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                            </div>
+                            <pre class="text-sm font-mono overflow-x-auto" style="color: var(--text-primary);">
+<span style="color: #ff6b6b;">function</span> <span style="color: #4cc9f0;">testQuality</span>(<span style="color: #f8f9fa;">software</span>) {
+  <span style="color: #ff6b6b;">const</span> bugs = <span style="color: #4cc9f0;">findBugs</span>(software);
+  
+  <span style="color: #ff6b6b;">if</span> (bugs.length > 0) {
+    <span style="color: #ff6b6b;">return</span> <span style="color: #2ec4b6;">fixBugs</span>(bugs);
+  }
+  
+  <span style="color: #ff6b6b;">return</span> <span style="color: #7209b7;">'Perfect Quality!'</span>;
+}
+
+<span style="color: #ff9f1c;">// Quality is not an act, it's a habit</span>
+<span style="color: #4cc9f0;">testQuality</span>(<span style="color: #7209b7;">'YourSoftware'</span>);
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
-    
-    <section id="about">
-        <h2>About Me</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>I am a Software Quality Engineer with extensive experience in all phases of the software lifecycle. Since my graduation in Computer Science from UFMG, I have worked in various areas of technology, including user support, development, and software quality.</p>
-                <p>My professional journey has allowed me to work on system testing for companies in basic sanitation, road logistics, Open Finance, non-profit private entities, and platforms managed by the government of Minas Gerais.</p>
-                <p>I am passionate about finding bugs before they find your users. With experience in test automation and agile methodologies, my goal is to ensure that delivered products meet the highest quality standards.</p>
-            </div>
-            <div class="skills-highlight">
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <span class="company">Areas of Expertise</span>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-20" style="background-color: var(--background);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-card">
+                <h2 class="text-3xl font-bold mb-8 text-center">About Me</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <p class="mb-4" style="color: var(--text-primary);">
+                            I'm a dedicated Test Automation Analyst currently working at Base2 Tecnologia. With a background in Computer Science from UFMG and specialized studies in Software Quality Management, I've developed a strong foundation in ensuring software excellence.
+                        </p>
+                        <p class="mb-4" style="color: var(--text-primary);">
+                            I'm passionate about technology, mathematics, and solving logical problems. My approach combines technical expertise with a deep understanding of user experience and business needs. I believe that quality is not just about finding bugs, but about delivering a seamless product that exceeds expectations.
+                        </p>
+                        <p class="mb-4" style="color: var(--text-primary);">
+                            My experience spans from API testing with tools like Postman and Swagger to automation with Selenide and Rest Assured. I've worked with BDD frameworks and collaborated closely with development teams in a shift-left testing approach to ensure quality from the start.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-4 mt-8">
+                            <div>
+                                <p class="text-4xl font-bold" style="color: var(--primary);">4+</p>
+                                <p style="color: var(--text-secondary);">Years Experience</p>
+                            </div>
+                            <div>
+                                <p class="text-4xl font-bold" style="color: var(--primary);">3+</p>
+                                <p style="color: var(--text-secondary);">Companies</p>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="responsibilities">
-                        <li>API Testing (REST, GraphQL)</li>
-                        <li>Manual & Exploratory Testing</li>
-                        <li>Automated Testing (Selenium, Rest-Assured)</li>
-                        <li>Mobile Testing (Appium)</li>
-                        <li>End-to-End Testing</li>
-                        <li>BDD and Gherkin implementation</li>
-                        <li>CI/CD Integration</li>
-                        <li>Test Planning & Strategy</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="experience">
-        <h2>Professional Experience</h2>
-        
-        <div class="experience-item">
-            <div class="experience-header">
-                <span class="company">Base2 - Banco Inter</span>
-                <span class="period">October 2024 - Present</span>
-            </div>
-            <div class="position">Automated Test Analyst</div>
-            <ul class="responsibilities">
-                <li>Focal point for Cheque-related demands, working on automation with Rest Assured</li>
-                <li>Focal point for frontend tests, automated using Selenide</li>
-                <li>Daily monitoring of regression tests, identifying environment issues and potential performance improvements</li>
-                <li>Support for TED, Automatic Payment and PBC demands</li>
-                <li>Support and reference for other squad members</li>
-            </ul>
-        </div>
-        
-        <div class="experience-item">
-            <div class="experience-header">
-                <span class="company">OPUS Software</span>
-                <span class="period">June 2024 - October 2024</span>
-            </div>
-            <div class="position">Quality Assurance Engineer III</div>
-            <ul class="responsibilities">
-                <li>Planning and designing test cases, focusing on APIs</li>
-                <li>Improvements in the automation process for regulatory demands of Open Finance and Open Insurance</li>
-                <li>Requirement gathering and enhancement of automated tests</li>
-                <li>Implementation of tests for a Payment Transaction Initiator</li>
-                <li>Building tests in a custom framework based on Gherkin/BDD</li>
-            </ul>
-        </div>
-        
-        <div class="experience-item">
-            <div class="experience-header">
-                <span class="company">OPUS Software</span>
-                <span class="period">November 2022 - June 2024</span>
-            </div>
-            <div class="position">Quality Assurance Engineer II</div>
-            <ul class="responsibilities">
-                <li>Planning and executing API tests using tools like Postman and Swagger</li>
-                <li>Writing automated test resource files</li>
-                <li>Active participation in planning sessions</li>
-                <li>Close collaboration with the development team in a shift-left testing approach</li>
-                <li>Preparing written evidence and reports of executed tests to document the work performed</li>
-            </ul>
-        </div>
-        
-        <div class="experience-item">
-            <div class="experience-header">
-                <span class="company">OPUS Software</span>
-                <span class="period">February 2022 - November 2022</span>
-            </div>
-            <div class="position">Quality Assurance Engineer I</div>
-            <ul class="responsibilities">
-                <li>Use of agile methodologies (Scrum/Kanban) across all areas</li>
-                <li>Responsible for planning and executing test cases, participating in planning meetings for new demands</li>
-                <li>Identifying product quality concerns and providing suggestions for improvements to prevent future issues</li>
-                <li>Main focus on testing BRK Ambiental products: BackOffice System, web recertification system, and property recertification app</li>
-                <li>Execution of API, E2E, and mobile tests</li>
-                <li>Periodic maintenance of test automation in Appium to ensure compliance</li>
-                <li>Manual testing with each step recorded and documented in Jira</li>
-            </ul>
-        </div>
-    </section>
-    
-    <section id="skills">
-        <h2>Technical Skills</h2>
-        <div class="skills-container">
-            <div class="skill-card">
-                <h3>API Testing</h3>
-                <p>Expert in testing REST and GraphQL APIs using Postman, Swagger, and Rest-Assured. Experience with contract validation, endpoint testing, and performance analysis.</p>
-            </div>
-            
-            <div class="skill-card">
-                <h3>Test Automation</h3>
-                <p>Proficient in building automation frameworks with Selenium, Rest-Assured, and Selenide for web applications and backend services. Experience with custom BDD frameworks.</p>
-            </div>
-            
-            <div class="skill-card">
-                <h3>Mobile Testing</h3>
-                <p>Strong experience with Appium for testing mobile applications on both iOS and Android platforms. Knowledge of mobile-specific testing approaches and challenges.</p>
-            </div>
-            
-            <div class="skill-card">
-                <h3>CI/CD Integration</h3>
-                <p>Integration of automated tests with Jenkins and other CI/CD platforms to ensure continuous quality throughout the development lifecycle.</p>
-            </div>
-            
-            <div class="skill-card">
-                <h3>BDD & Testing Methodologies</h3>
-                <p>Implementation of Behavior-Driven Development using Gherkin syntax. Experienced in various testing methodologies including exploratory testing, regression testing, and shift-left approach.</p>
-            </div>
-            
-            <div class="skill-card">
-                <h3>Tools & Platforms</h3>
-                <p>Proficient with Jira, Git, GitHub, Postman, Swagger, Jenkins, and various test management tools. Experience with Zephyr for test documentation and execution.</p>
-            </div>
-        </div>
-    </section>
-    
-    <section class="projects" id="projects">
-        <h2>Key Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-img">Open Finance</div>
-                <div class="project-content">
-                    <h3>Open Finance API Testing Framework</h3>
-                    <p>Design and implementation of an automated testing framework for Open Finance regulatory APIs, ensuring compliance and reliability of financial data sharing systems.</p>
-                    <div class="project-links">
-                        <a href="#" class="project-link">Details</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-img">Mobile</div>
-                <div class="project-content">
-                    <h3>Property Recertification App</h3>
-                    <p>End-to-end testing suite for a mobile property recertification application using Appium, covering user flows and integration with backend services.</p>
-                    <div class="project-links">
-                        <a href="#" class="project-link">Details</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-img">Payment</div>
-                <div class="project-content">
-                    <h3>Payment Transaction Initiator</h3>
-                    <p>Comprehensive test implementation for a payment system, including critical error handling, security validations, and performance under load conditions.</p>
-                    <div class="project-links">
-                        <a href="#" class="project-link">Details</a>
+                    
+                    <div class="flex justify-center">
+                        <div class="relative w-64 h-64 md:w-80 md:h-80">
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full transform rotate-3"></div>
+                            <img src="foto de perfil_LE_upscale_balanced_light_ai_30_remove_background_general_clip_to_object_off.png" alt="Enok Rocha" class="absolute inset-0 w-full h-full object-cover rounded-full p-2" />
+                            
+                            <div class="absolute -bottom-5 -right-5 bg-white dark:bg-gray-800 rounded-lg p-3 shadow-lg" style="background-color: var(--card-bg);">
+                                <p class="text-sm font-bold" style="color: var(--primary);">📍 Belo Horizonte, Minas Gerais, Brazil</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <section class="education" id="education">
-        <h2>Education</h2>
-        <div class="education-grid">
-            <div class="education-card">
-                <h3>Bachelor's Degree in Computer Science</h3>
-                <div class="institution">Universidade Federal de Minas Gerais (UFMG)</div>
-                <div class="period">2016-2021</div>
-                <p>Foundation in computer programming, algorithms, software engineering, and system design principles. Focused on software quality methodologies in final semesters.</p>
+
+    <!-- Experience Timeline Section -->
+    <section id="experience" class="py-20" style="background-color: var(--background);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-card">
+                <h2 class="text-3xl font-bold mb-8 text-center">Professional Timeline</h2>
+                
+                <div class="relative" style="opacity: 1 !important;">
+                    <!-- Timeline container -->
+                    <div class="timeline-container" style="opacity: 1 !important;">
+                        <div class="timeline-line" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div class="mb-12">
+                            <div class="flex flex-wrap justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">Test Automation Analyst at Base2 Tecnologia</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;">Oct 2023 - Present</span>
+                            </div>
+                            <p class="mb-4" style="color: var(--text-secondary);">Leading quality automation initiatives for banking applications</p>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
+                                    <span>Focal point for Cheque-related demands, working on automation with Rest Assured</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
+                                    <span>Focal point for frontend tests, automated using Selenide</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
+                                    <span>Daily monitoring of regression tests, identifying environment issues and potential performance improvements</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Second experience -->
+                    <div class="timeline-container" style="opacity: 1 !important;">
+                        <div class="timeline-line" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div class="mb-12">
+                            <div class="flex flex-wrap justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">Quality Assurance Engineer III at OPUS Software</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;">Jun 2023 - Oct 2023</span>
+                            </div>
+                            <p class="mb-4" style="color: var(--text-secondary);">Worked on projects focused on regulatory demands for Open Finance and Open Insurance</p>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
+                                    <span>Planning and executing API tests using tools like Postman and Swagger</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
+                                    <span>Writing automated test resource files (feature files) using a Gherkin/BDD-based framework</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
+                                    <span>Actively participating in planning sessions with development team in a shift-left testing approach</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Third experience -->
+                    <div class="timeline-container" style="opacity: 1 !important;">
+                        <div class="timeline-line" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div class="mb-12">
+                            <div class="flex flex-wrap justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">Quality Assurance Engineer II at OPUS Software</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;">Nov 2022 - Jun 2023</span>
+                            </div>
+                            <p class="mb-4" style="color: var(--text-secondary);">Continued work on Open Finance and Open Insurance regulatory projects</p>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
+                                    <span>Created written evidence and test reports to document testing activities</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
+                                    <span>Implemented BDD testing practices with Gherkin syntax</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Fourth experience -->
+                    <div class="timeline-container" style="opacity: 1 !important;">
+                        <div class="timeline-line" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div class="mb-12">
+                            <div class="flex flex-wrap justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">Quality Assurance Engineer I at OPUS Software</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;">Feb 2022 - Nov 2022</span>
+                            </div>
+                            <p class="mb-4" style="color: var(--text-secondary);">Worked on projects for BRK Ambiental and PagBem</p>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
+                                    <span>Conducted API, E2E, and mobile testing using Agile methodologies (Scrum/Kanban)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
+                                    <span>Maintained test automation framework using Appium for mobile testing</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
+                                    <span>Used Jira and Zephyr for test documentation, and Swagger for API testing</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Fifth experience -->
+                    <div class="timeline-container" style="opacity: 1 !important;">
+                        <div class="timeline-line" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div class="mb-12">
+                            <div class="flex flex-wrap justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">Junior Development Analyst at Synergia</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;">Oct 2021 - Jan 2022</span>
+                            </div>
+                            <p class="mb-4" style="color: var(--text-secondary);">Development for the State of Minas Gerais Procurement Portal</p>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
+                                    <span>Developed features and rewrote code for new technologies, primarily for the auction system</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
+                                    <span>Worked with Java, React, TomCat, Maven, JSP, Jenkins, JUnit, Spring, and Hibernate</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            
-            <div class="education-card">
-                <h3>Professional Certification in Test Automation</h3>
-                <div class="institution">Selenium Masterclass</div>
-                <div class="period">2022</div>
-                <p>Comprehensive training in web automation using Selenium WebDriver, TestNG, and Page Object Model design patterns.</p>
-            </div>
-            
-            
-            <div class="education-card">
-                <h3>API Testing & Automation</h3>
-                <div class="institution">Udemy - Rest Assured Masterclass</div>
-                <div class="period">2023</div>
-                <p>Advanced techniques for API testing automation using Rest-Assured, focusing on RESTful services and GraphQL endpoints.</p>
-            </div>
-            
-        </div>
-        
-        <div style="margin-top: 4rem; text-align: center;">
-            <h3 style="margin-bottom: 1.5rem;">Continuous Learning</h3>
-            <p style="max-width: 800px; margin: 0 auto; line-height: 1.8;">
-                As a professional dedicated to quality assurance, I believe in lifelong learning to stay ahead of industry trends and technologies.
-                I regularly participate in webinars, online courses, and testing communities to expand my knowledge and skills.
-                Currently exploring security testing methodologies and performance testing tools to further enhance my expertise.
-            </p>
         </div>
     </section>
-    <script src="js/constellation-animation.js"></script>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20" style="background-color: var(--background);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-card">
+                <h2 class="text-3xl font-bold mb-8 text-center">Education</h2>
+                
+                <div class="relative" style="opacity: 1 !important;">
+                    <!-- BSc Education Entry -->
+                    <div class="timeline-container" style="opacity: 1 !important;">
+                        <div class="timeline-line" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div class="mb-12">
+                            <div class="flex flex-wrap justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">BSc Computer Science</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--secondary); color: white;">2016 - 2021</span>
+                            </div>
+                            <p class="mb-4" style="color: var(--text-secondary);">Federal University of Minas Gerais (UFMG)</p>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
+                                    <span>Bachelor's degree in Computer Science</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Post Graduate Education Entry -->
+                    <div class="timeline-container" style="opacity: 1 !important;">
+                        <div class="timeline-line" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div>
+                            <div class="flex flex-wrap justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">Post-Graduate Specialization in Software Quality Management</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--secondary); color: white;">May 2022 - Sep 2022</span>
+                            </div>
+                            <p class="mb-4" style="color: var(--text-secondary);">Faculdade UniBF</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Languages -->
+                    <div class="mt-12">
+                        <h3 class="text-xl font-bold mb-4">Languages</h3>
+                        
+                        <div class="mb-6">
+                            <div class="flex justify-between mb-1">
+                                <span>English</span>
+                                <span>Professional Working Proficiency</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>Portuguese</span>
+                                <span>Native</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Certifications -->
+    <section id="skills" class="py-20" style="background-color: var(--background);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-card">
+                <h2 class="text-3xl font-bold mb-8 text-center">Technical Expertise</h2>
+                
+                <div class="mb-12">
+                    <h3 class="text-xl font-bold mb-4">Testing Frameworks & Tools</h3>
+                    <div class="flex flex-wrap" style="opacity: 1 !important; visibility: visible !important;">
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> Selenium
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> Appium
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> REST Assured
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> Postman
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> Selenide
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> TestNG
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> JUnit
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> BDD
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> POM
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> Gherkin
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> Cypress
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> WebdriverIO
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> Robot Framework
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> Jenkins
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> Jira
+                        </div>
+                        <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
+                            <i class="fas fa-check-circle mr-2"></i> Git
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-12">
+                    <h3 class="text-xl font-bold mb-4">Programming Languages & Frameworks</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>Java</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>JavaScript</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>Python</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>Gherkin</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-12">
+                    <h3 class="text-xl font-bold mb-4">Methodologies & Best Practices</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="border p-4 rounded-lg" style="border-color: var(--border-color);">
+                            <div class="text-center mb-4">
+                                <i class="fas fa-sync text-4xl" style="color: var(--primary);"></i>
+                            </div>
+                            <h4 class="text-lg font-semibold text-center mb-2">Agile Testing</h4>
+                            <p class="text-center" style="color: var(--text-secondary);">Experienced in Scrum and Kanban frameworks</p>
+                        </div>
+                        
+                        <div class="border p-4 rounded-lg" style="border-color: var(--border-color);">
+                            <div class="text-center mb-4">
+                                <i class="fas fa-vial text-4xl" style="color: var(--primary);"></i>
+                            </div>
+                            <h4 class="text-lg font-semibold text-center mb-2">BDD/TDD</h4>
+                            <p class="text-center" style="color: var(--text-secondary);">Behavior & Test Driven Development expert</p>
+                        </div>
+                        
+                        <div class="border p-4 rounded-lg" style="border-color: var(--border-color);">
+                            <div class="text-center mb-4">
+                                <i class="fas fa-search text-4xl" style="color: var(--primary);"></i>
+                            </div>
+                            <h4 class="text-lg font-semibold text-center mb-2">Exploratory Testing</h4>
+                            <p class="text-center" style="color: var(--text-secondary);">Thorough and systematic approach to discovery</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Certifications</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="cert-card">
+                            <h4 class="font-semibold mb-1">Testes Automáticos</h4>
+                            <p style="color: var(--text-secondary);">Automation Testing</p>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <h4 class="font-semibold mb-1">Manipulando o D.O.M. com Javascript</h4>
+                            <p style="color: var(--text-secondary);">JavaScript DOM Manipulation</p>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <h4 class="font-semibold mb-1">Automação de testes de API com Postman</h4>
+                            <p style="color: var(--text-secondary);">API Test Automation with Postman</p>
+                        </div>
+                        
+                        <div class="cert-card">
+                            <h4 class="font-semibold mb-1">Fundamentos e prática do teste de software</h4>
+                            <p style="color: var(--text-secondary);">Software Testing Fundamentals and Practice</p>
+                        </div>
+
+                        <div class="cert-card">
+                            <h4 class="font-semibold mb-1">Posicionando elementos com Flexbox em CSS</h4>
+                            <p style="color: var(--text-secondary);">CSS Flexbox Positioning</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20" style="background-color: var(--background);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-card">
+                <h2 class="text-3xl font-bold mb-8 text-center">Featured Projects</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8" style="opacity: 1 !important; visibility: visible !important;">
+                    <!-- Project 1 -->
+                    <div class="project-card" style="opacity: 1 !important; visibility: visible !important; transform: none !important;">
+                        <div class="project-image relative" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://via.placeholder.com/600x300?text=Mantis+Test'); opacity: 1 !important;">
+                            <!-- Technology Badges -->
+                            <div class="absolute bottom-2 right-2 flex flex-wrap justify-end">
+                                <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white" alt="Java" class="h-7 m-1 rounded">
+                                <img src="https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white" alt="Selenium" class="h-7 m-1 rounded">
+                            </div>
+                        </div>
+                        <div class="project-content" style="opacity: 1 !important;">
+                            <h3 class="text-xl font-bold mb-2">Mantis Test Automation</h3>
+                            <p class="mb-4" style="color: var(--text-secondary);">Projeto de testes em Selenium para o Mantis Bug Tracker.</p>
+                            
+                            <div class="flex flex-wrap mb-4">
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">Java</span>
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">Selenium</span>
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">Test Automation</span>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <a href="#" class="text-sm font-medium hover:underline" style="color: var(--primary);">
+                                    <i class="fas fa-link mr-1"></i> Documentation
+                                </a>
+                                <a href="https://github.com/enokjanuario/mantisTest" target="_blank" class="text-sm font-medium hover:underline" style="color: var(--primary);">
+                                    <i class="fab fa-github mr-1"></i> Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="project-card" style="opacity: 1 !important; visibility: visible !important; transform: none !important;">
+                        <div class="project-image relative" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://via.placeholder.com/600x300?text=ReqRes+API')">
+                            <!-- Technology Badges -->
+                            <div class="absolute bottom-2 right-2 flex flex-wrap justify-end">
+                                <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white" alt="Java" class="h-7 m-1 rounded">
+                                <img src="https://img.shields.io/badge/REST%20API-FF6C37?style=for-the-badge&logo=postman&logoColor=white" alt="REST API" class="h-7 m-1 rounded">
+                            </div>
+                        </div>
+                        <div class="project-content" style="opacity: 1 !important;">
+                            <h3 class="text-xl font-bold mb-2">ReqRes API Testing</h3>
+                            <p class="mb-4" style="color: var(--text-secondary);">Automated test suite for ReqRes REST API endpoints.</p>
+                            
+                            <div class="flex flex-wrap mb-4">
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">Java</span>
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">REST API</span>
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">Test Automation</span>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <a href="#" class="text-sm font-medium hover:underline" style="color: var(--primary);">
+                                    <i class="fas fa-file-alt mr-1"></i> Documentation
+                                </a>
+                                <a href="https://github.com/enokjanuario/ReqRes" target="_blank" class="text-sm font-medium hover:underline" style="color: var(--primary);">
+                                    <i class="fab fa-github mr-1"></i> Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="project-card" style="opacity: 1 !important; visibility: visible !important; transform: none !important;">
+                        <div class="project-image relative" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://via.placeholder.com/600x300?text=TDD+JavaScript')">
+                            <!-- Technology Badges -->
+                            <div class="absolute bottom-2 right-2 flex flex-wrap justify-end">
+                                <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" class="h-7 m-1 rounded">
+                                <img src="https://img.shields.io/badge/Mocha-8D6748?style=for-the-badge&logo=mocha&logoColor=white" alt="Mocha" class="h-7 m-1 rounded">
+                            </div>
+                        </div>
+                        <div class="project-content" style="opacity: 1 !important;">
+                            <h3 class="text-xl font-bold mb-2">TDD with Mocha in JavaScript</h3>
+                            <p class="mb-4" style="color: var(--text-secondary);">Test-Driven Development project using Mocha framework in JavaScript.</p>
+                            
+                            <div class="flex flex-wrap mb-4">
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">JavaScript</span>
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">TDD</span>
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">Mocha</span>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <a href="#" class="text-sm font-medium hover:underline" style="color: var(--primary);">
+                                    <i class="fas fa-play-circle mr-1"></i> Demo Files
+                                </a>
+                                <a href="https://github.com/enokjanuario/qa.tdd-mocha.javascript" target="_blank" class="text-sm font-medium hover:underline" style="color: var(--primary);">
+                                    <i class="fab fa-github mr-1"></i> Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 4 -->
+                    <div class="project-card" style="opacity: 1 !important; visibility: visible !important; transform: none !important;">
+                        <div class="project-image relative" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://via.placeholder.com/600x300?text=BDD+CucumberJS')">
+                            <!-- Technology Badges -->
+                            <div class="absolute bottom-2 right-2 flex flex-wrap justify-end">
+                                <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" class="h-7 m-1 rounded">
+                                <img src="https://img.shields.io/badge/Cucumber-23D96C?style=for-the-badge&logo=cucumber&logoColor=white" alt="Cucumber" class="h-7 m-1 rounded">
+                            </div>
+                        </div>
+                        <div class="project-content" style="opacity: 1 !important;">
+                            <h3 class="text-xl font-bold mb-2">BDD with CucumberJS</h3>
+                            <p class="mb-4" style="color: var(--text-secondary);">Behavior-Driven Development project using CucumberJS and Gherkin.</p>
+                            
+                            <div class="flex flex-wrap mb-4">
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">JavaScript</span>
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">BDD</span>
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">Cucumber</span>
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">Gherkin</span>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <a href="#" class="text-sm font-medium hover:underline" style="color: var(--primary);">
+                                    <i class="fas fa-chart-line mr-1"></i> Test Reports
+                                </a>
+                                <a href="https://github.com/enokjanuario/qa.bdd-cucumberjs.javascript" target="_blank" class="text-sm font-medium hover:underline" style="color: var(--primary);">
+                                    <i class="fab fa-github mr-1"></i> Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 5 -->
+                    <div class="project-card" style="opacity: 1 !important; visibility: visible !important; transform: none !important;">
+                        <div class="project-image relative" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://via.placeholder.com/600x300?text=WebdriverIO')">
+                            <!-- Technology Badges -->
+                            <div class="absolute bottom-2 right-2 flex flex-wrap justify-end">
+                                <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" class="h-7 m-1 rounded">
+                                <img src="https://img.shields.io/badge/WebdriverIO-EA5906?style=for-the-badge&logo=webdriverio&logoColor=white" alt="WebdriverIO" class="h-7 m-1 rounded">
+                            </div>
+                        </div>
+                        <div class="project-content" style="opacity: 1 !important;">
+                            <h3 class="text-xl font-bold mb-2">Automation Exercise with WebdriverIO</h3>
+                            <p class="mb-4" style="color: var(--text-secondary);">Web automation testing framework using WebdriverIO for Automation Exercise website.</p>
+                            
+                            <div class="flex flex-wrap mb-4">
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">JavaScript</span>
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">WebdriverIO</span>
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">Web Automation</span>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <a href="#" class="text-sm font-medium hover:underline" style="color: var(--primary);">
+                                    <i class="fas fa-desktop mr-1"></i> Demo
+                                </a>
+                                <a href="https://github.com/enokjanuario/qa.automationexercise-web.webdriverio" target="_blank" class="text-sm font-medium hover:underline" style="color: var(--primary);">
+                                    <i class="fab fa-github mr-1"></i> Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 6 -->
+                    <div class="project-card" style="opacity: 1 !important; visibility: visible !important; transform: none !important;">
+                        <div class="project-image relative" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://via.placeholder.com/600x300?text=API+Testing')">
+                            <!-- Technology Badges -->
+                            <div class="absolute bottom-2 right-2 flex flex-wrap justify-end">
+                                <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" class="h-7 m-1 rounded">
+                                <img src="https://img.shields.io/badge/PactumJS-6E59CC?style=for-the-badge&logo=javascript&logoColor=white" alt="PactumJS" class="h-7 m-1 rounded">
+                            </div>
+                        </div>
+                        <div class="project-content" style="opacity: 1 !important;">
+                            <h3 class="text-xl font-bold mb-2">API Testing with PactumJS</h3>
+                            <p class="mb-4" style="color: var(--text-secondary);">API test automation for Automation Exercise using PactumJS.</p>
+                            
+                            <div class="flex flex-wrap mb-4">
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">JavaScript</span>
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">PactumJS</span>
+                                <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">API Testing</span>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <a href="#" class="text-sm font-medium hover:underline" style="color: var(--primary);">
+                                    <i class="fas fa-file-code mr-1"></i> Documentation
+                                </a>
+                                <a href="https://github.com/enokjanuario/qa.automationexercise-api.pactumjs" target="_blank" class="text-sm font-medium hover:underline" style="color: var(--primary);">
+                                    <i class="fab fa-github mr-1"></i> Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20" style="background-color: var(--background);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-card">
+                <h2 class="text-3xl font-bold mb-8 text-center">Get In Touch</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full" style="background-color: var(--primary);">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium" style="color: var(--text-secondary);">Location</p>
+                                    <p class="text-lg">Belo Horizonte, Minas Gerais, Brazil</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full" style="background-color: var(--primary);">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium" style="color: var(--text-secondary);">Email</p>
+                                    <a href="mailto:ejrocha07@gmail.com" class="text-lg hover:underline">ejrocha07@gmail.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full" style="background-color: var(--primary);">
+                                    <i class="fas fa-phone text-white"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium" style="color: var(--text-secondary);">Phone</p>
+                                    <p class="text-lg">+55 31 99150-8940</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="text-lg font-semibold mb-2">Connect with me</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://linkedin.com/in/enokjrocha" target="_blank" class="h-10 w-10 flex items-center justify-center rounded-full border hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-colors duration-300" style="border-color: var(--border-color); color: var(--text-primary);">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://github.com/enokjanuario" target="_blank" class="h-10 w-10 flex items-center justify-center rounded-full border hover:bg-gray-800 hover:border-gray-800 hover:text-white transition-colors duration-300" style="border-color: var(--border-color); color: var(--text-primary);">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://twitter.com/" target="_blank" class="h-10 w-10 flex items-center justify-center rounded-full border hover:bg-blue-400 hover:border-blue-400 hover:text-white transition-colors duration-300" style="border-color: var(--border-color); color: var(--text-primary);">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Send Me a Message</h3>
+                        
+                        <form id="contact-form">
+                            <div class="mb-4">
+                                <input type="text" placeholder="Your Name" class="form-input" required>
+                            </div>
+                            <div class="mb-4">
+                                <input type="email" placeholder="Your Email" class="form-input" required>
+                            </div>
+                            <div class="mb-4">
+                                <input type="text" placeholder="Subject" class="form-input" required>
+                            </div>
+                            <div class="mb-4">
+                                <textarea placeholder="Your Message" class="form-input" rows="5" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="animated-btn w-full">
+                                <i class="fas fa-paper-plane mr-2"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8" style="background-color: var(--background);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p style="color: var(--text-secondary);">© 2024 Enok Rocha. All rights reserved.</p>
+            <p class="mt-2" style="color: var(--text-secondary);">Quality-driven Test Automation Analyst</p>
+        </div>
+    </footer>
+    
+    <!-- Go to top button -->
+    <button id="go-to-top" class="fixed bottom-8 right-8 h-12 w-12 rounded-full flex items-center justify-center shadow-lg z-40 transition-all duration-300 opacity-0 invisible" style="background-color: var(--primary); color: white;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Animation Script -->
+    <script src="gsap-animation.js"></script>
+    
+    <!-- Main JS -->
+    <script>
+        // Theme switcher functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            htmlElement.setAttribute('data-theme', savedTheme);
+            if (savedTheme === 'dark') {
+                themeToggle.checked = true;
+            }
+        }
+        
+        // Theme toggle handler
+        themeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                htmlElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Navigation active state
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Mobile menu
+        const mobileMenuToggle = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+        
+        // Go to top button
+        const goToTopButton = document.getElementById('go-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                goToTopButton.classList.remove('opacity-0', 'invisible');
+                goToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                goToTopButton.classList.remove('opacity-100', 'visible');
+                goToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        goToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Skills progress animation
+        const animateProgress = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-progress');
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+        
+        const progressObserver = new IntersectionObserver(animateProgress, {
+            threshold: 0.2
+        });
+        
+        document.querySelectorAll('.progress-bar').forEach(bar => {
+            progressObserver.observe(bar);
+        });
+        
+        // Contact form handling
+        const contactForm = document.getElementById('contact-form');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulate form submission
+                const submitButton = this.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.innerHTML;
+                
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Reset form
+                    contactForm.reset();
+                    
+                    // Show success message
+                    submitButton.innerHTML = '<i class="fas fa-check mr-2"></i> Sent Successfully';
+                    
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalButtonText;
+                    }, 3000);
+                }, 2000);
+            });
+        }
+        
+        // Initialize AOS animation
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Script para garantir que o ScrollTrigger funcione corretamente
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+        
+        // Inicializar animações de timeline após o carregamento da página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adicionar estilo para forçar as barras de progresso
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .progress-bar, .progress-fill {
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                }
+                .progress-fill[style*="width: 90%"] { width: 90% !important; }
+                .progress-fill[style*="width: 80%"] { width: 80% !important; }
+                .progress-fill[style*="width: 70%"] { width: 70% !important; }
+                .progress-fill[style*="width: 85%"] { width: 85% !important; }
+                .progress-fill[style*="width: 100%"] { width: 100% !important; }
+                .skill-pill {
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                }
+                .project-card, .project-image, .project-content {
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                    transform: none !important;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Animação das seções de timeline
+            const timelineContainers = document.querySelectorAll('.timeline-container');
+            timelineContainers.forEach((container, index) => {
+                gsap.from(container, {
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    x: index % 2 === 0 ? -30 : 30,
+                    duration: 0.8,
+                    delay: index * 0.2,
+                    ease: "power3.out"
+                });
+            });
+            
+            // Certifique-se de que os elementos .timeline-line e .timeline-dot estão visíveis
+            gsap.set('.timeline-line, .timeline-dot', { autoAlpha: 1 });
+            
+            // Garantir que todos os elementos importantes estejam visíveis
+            gsap.set('.skill-pill, .project-card, .project-image, .project-content, .progress-bar, .progress-fill, .cert-card', { 
+                autoAlpha: 1,
+                clearProps: "all" 
+            });
+            
+            // Função para garantir visibilidade imediata de elementos essenciais
+            function forceVisibility() {
+                // Forçar visibilidade das skill pills
+                document.querySelectorAll('.skill-pill').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.visibility = 'visible';
+                });
+                
+                // Forçar visibilidade dos projetos
+                document.querySelectorAll('.project-card, .project-image, .project-content').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.visibility = 'visible';
+                    el.style.transform = 'none';
+                });
+                
+                // Forçar visibilidade das barras de progresso
+                document.querySelectorAll('.progress-bar, .progress-fill').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.visibility = 'visible';
+                });
+                
+                // Replicar as larguras originais
+                document.querySelectorAll('.progress-fill').forEach(el => {
+                    if (el.style.width) {
+                        const originalWidth = el.style.width;
+                        el.style.width = originalWidth;
+                    }
+                });
+            }
+            
+            // Chamar imediatamente e também após um pequeno atraso para garantir
+            forceVisibility();
+            setTimeout(forceVisibility, 500);
+        });
+    </script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
+    <!-- Particles Animation -->
+    <script src="particles.js"></script>
+    
+    <!-- Game Animation -->
+    <script src="game.js"></script>
+    
+    <!-- Correção para elementos visíveis -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Função para garantir visibilidade dos elementos
+        function forceElementsVisibility() {
+            console.log('Forçando visibilidade dos elementos');
+            
+            // Correção para partículas
+            const particlesContainer = document.getElementById('particles-container');
+            if (particlesContainer) {
+                particlesContainer.style.zIndex = '1';
+                particlesContainer.style.opacity = '0.8'; 
+                console.log('Ajustando z-index e opacidade das partículas para garantir visibilidade');
+            }
+            
+            // Corrigir elementos de projeto
+            const projectCards = document.querySelectorAll('.project-card, .project-image, .project-content');
+            projectCards.forEach(function(el) {
+                el.style.cssText = 'opacity: 1 !important; visibility: visible !important; transform: none !important; display: block !important;';
+            });
+            
+            // Corrigir barras de progresso
+            const progressBars = document.querySelectorAll('.progress-bar, .progress-fill');
+            progressBars.forEach(function(el) {
+                el.style.cssText = 'opacity: 1 !important; visibility: visible !important; display: block !important;';
+            });
+            
+            // Confirmar que as larguras das barras de progresso estão definidas
+            document.querySelectorAll('.progress-fill').forEach(function(el) {
+                const currentWidth = el.style.width;
+                if (currentWidth) {
+                    el.style.width = currentWidth;
+                }
+            });
+            
+            // Adicionar estilos CSS diretos
+            const styleFixElement = document.createElement('style');
+            styleFixElement.innerHTML = `
+                .progress-fill { 
+                    opacity: 1 !important; 
+                    visibility: visible !important;
+                }
+                .progress-fill[style*="width: 90%"] { width: 90% !important; }
+                .progress-fill[style*="width: 80%"] { width: 80% !important; }
+                .progress-fill[style*="width: 70%"] { width: 70% !important; }
+                .progress-fill[style*="width: 85%"] { width: 85% !important; }
+                .progress-fill[style*="width: 100%"] { width: 100% !important; }
+                
+                .project-card {
+                    display: block !important;
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                    transform: none !important;
+                }
+                
+                .project-image {
+                    display: block !important;
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                }
+                
+                .project-content {
+                    display: block !important;
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                }
+                
+                #particles-container {
+                    z-index: 1 !important;
+                    opacity: 0.8 !important;
+                    display: block !important;
+                    visibility: visible !important;
+                }
+                
+                #particles-container canvas {
+                    display: block !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                }
+            `;
+            document.head.appendChild(styleFixElement);
+        }
+        
+        // Executar no carregamento e após um intervalo
+        forceElementsVisibility();
+        setTimeout(forceElementsVisibility, 500);
+        setTimeout(forceElementsVisibility, 1000);
+        
+        // Verificar e ajustar quando o layout for redimensionado
+        window.addEventListener('resize', forceElementsVisibility);
+    });
+    </script>
 </body>
 </html>

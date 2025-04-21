@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Fundo Animado</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        h1 {
+            color: #4361ee;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Teste de Fundo Animado</h1>
+        <p>Se o fundo estiver animado, você verá gradientes e formas suaves se movendo pelo fundo.</p>
+    </div>
+    
+    <!-- Script do fundo animado -->
+    <script src="background.js"></script>
+    
+    <!-- Script para debugging -->
+    <script>
+        console.log('Página de teste carregada');
+        
+        // Verificar se o container de fundo foi criado
+        setTimeout(function() {
+            const bgContainer = document.getElementById('background-container');
+            if (bgContainer) {
+                console.log('Container de fundo encontrado:', bgContainer);
+                console.log('Visibilidade:', bgContainer.style.visibility);
+                console.log('Display:', bgContainer.style.display);
+                console.log('z-index:', bgContainer.style.zIndex);
+                console.log('Elementos filhos:', bgContainer.children.length);
+            } else {
+                console.error('Container de fundo NÃO encontrado');
+            }
+        }, 1000);
+    </script>
+</body>
+</html> 

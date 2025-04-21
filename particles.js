@@ -9,10 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Container de partículas anterior removido');
     }
     
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
+    // Criar e inserir o container antes de tudo
+    const body = document.body;
     const particlesContainer = document.createElement('div');
-    
     particlesContainer.id = 'particles-container';
     particlesContainer.style.cssText = `
         position: fixed;
@@ -20,13 +19,17 @@ document.addEventListener('DOMContentLoaded', function() {
         left: 0;
         width: 100vw;
         height: 100vh;
-        z-index: 1;
-        opacity: 0.8;
+        z-index: -1;
+        opacity: 0.3;
         overflow: hidden;
         pointer-events: none;
         background: transparent;
     `;
+    // Insira no início do body para garantir que está atrás de todo o conteúdo
+    body.insertBefore(particlesContainer, body.firstChild);
     
+    // Criar e adicionar o canvas
+    const canvas = document.createElement('canvas');
     canvas.style.cssText = `
         position: absolute;
         top: 0;
@@ -36,21 +39,40 @@ document.addEventListener('DOMContentLoaded', function() {
         background: transparent;
         display: block;
     `;
-    
     particlesContainer.appendChild(canvas);
-    document.body.appendChild(particlesContainer);
+    
+    // Obter contexto de renderização
+    const ctx = canvas.getContext('2d');
     
     console.log('Particles container added to DOM');
+    
+    // Adicione uma camada de fallback para garantir que algo seja exibido
+    const fallbackLayer = document.createElement('div');
+    fallbackLayer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -2;
+        opacity: 0.2;
+        pointer-events: none;
+        background: linear-gradient(45deg, rgba(67, 97, 238, 0.03) 25%, transparent 25%, 
+                    transparent 50%, rgba(67, 97, 238, 0.03) 50%, rgba(67, 97, 238, 0.03) 75%, 
+                    transparent 75%, transparent);
+        background-size: 20px 20px;
+    `;
+    body.insertBefore(fallbackLayer, body.firstChild);
     
     let w, h;
     let particlesArray = [];
     
     // Configurações
-    const particleCount = window.innerWidth < 768 ? 60 : 120; // Mais partículas para melhor visibilidade
+    const particleCount = window.innerWidth < 768 ? 30 : 60; // Menos partículas
     const connectionDistance = window.innerWidth < 768 ? 120 : 200; // Distância máxima para conectar partículas
-    const moveSpeed = 0.4; // Velocidade reduzida das partículas
-    const particleSize = 2.8; // Tamanho aumentado das partículas
-    const particleOpacity = 0.9; // Opacidade aumentada das partículas
+    const moveSpeed = 0.3; // Velocidade reduzida das partículas
+    const particleSize = 2.2; // Tamanho reduzido das partículas
+    const particleOpacity = 0.4; // Opacidade reduzida das partículas
     
     // Função para obter a cor do tema atual
     function getThemeColors() {
@@ -59,13 +81,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (isDarkTheme) {
             return {
-                particleColor: '#4cc9f0',
-                lineColor: 'rgba(76, 201, 240, 0.3)' // Linhas mais visíveis
+                particleColor: '#8dd6f3', // Cores mais claras para tema escuro
+                lineColor: 'rgba(141, 214, 243, 0.1)' // Linhas mais claras
             };
         } else {
             return {
-                particleColor: '#4361ee',
-                lineColor: 'rgba(67, 97, 238, 0.25)' // Linhas mais visíveis
+                particleColor: '#a1b5fa', // Cores mais claras para tema claro
+                lineColor: 'rgba(161, 181, 250, 0.08)' // Linhas mais claras
             };
         }
     }
@@ -77,8 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
             this.y = Math.random() * h;
             this.speedX = Math.random() * moveSpeed * 2 - moveSpeed;
             this.speedY = Math.random() * moveSpeed * 2 - moveSpeed;
-            this.size = Math.random() * particleSize + 1;
-            this.opacity = Math.random() * particleOpacity + 0.3;
+            this.size = Math.random() * particleSize + 0.8;
+            this.opacity = Math.random() * particleOpacity + 0.1;
         }
         
         // Atualizar posição
@@ -147,8 +169,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     ctx.beginPath();
                     ctx.strokeStyle = lineColor;
-                    ctx.globalAlpha = opacity * 0.7; // Linhas mais visíveis
-                    ctx.lineWidth = 1;
+                    ctx.globalAlpha = opacity * 0.5; // Linhas mais claras
+                    ctx.lineWidth = 0.8; // Linhas mais finas
                     ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
                     ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
                     ctx.stroke();
@@ -180,8 +202,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('particles-container');
         if (container) {
             console.log('Container de partículas presente:', container.style.zIndex);
-            container.style.zIndex = '1'; // Garantir que o z-index seja correto
-            container.style.opacity = '0.8'; // Garantir opacidade
+            container.style.zIndex = '-1'; // Garantir que o z-index seja correto
+            container.style.opacity = '0.3'; // Garantir opacidade mais baixa
         } else {
             console.log('Container de partículas NÃO encontrado');
             // Recriar o container caso tenha sido removido
@@ -193,21 +215,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 left: 0;
                 width: 100vw;
                 height: 100vh;
-                z-index: 1;
-                opacity: 0.8;
+                z-index: -1;
+                opacity: 0.3;
                 overflow: hidden;
                 pointer-events: none;
                 background: transparent;
             `;
-            document.body.appendChild(newContainer);
+            document.body.insertBefore(newContainer, document.body.firstChild);
             console.log('Container de partículas recriado');
         }
-    }, 2000);
+    }, 1000);
     
-    // Limpar verificação após 10 segundos
+    // Limpar verificação após 30 segundos
     setTimeout(function() {
         clearInterval(visibilityCheck);
-    }, 10000);
+    }, 30000);
     
     // Inicializar
     resizeCanvas();
@@ -255,5 +277,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 particlesArray[i].y += forceY;
             }
         }
+    });
+    
+    // Força a aplicação das partículas após o carregamento completo da página
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            if (document.getElementById('particles-container')) {
+                document.getElementById('particles-container').style.display = 'block';
+                document.getElementById('particles-container').style.zIndex = '-1';
+                document.getElementById('particles-container').style.opacity = '0.3';
+            }
+        }, 1000);
     });
 }); 

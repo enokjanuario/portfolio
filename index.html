@@ -84,6 +84,8 @@
             max-width: 1200px;
             transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
             border: 1px solid var(--border-color);
+            position: relative;
+            z-index: 2; /* Garantir que as seções fiquem acima das partículas */
         }
 
         .section-card:hover {
@@ -133,12 +135,34 @@
             margin: 0.25rem;
             font-size: 0.9rem;
             transition: all 0.2s;
+            position: relative; /* Adicionando posição relativa */
+            z-index: 1; /* Z-index base */
         }
 
         .skill-pill:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-3px);
+            z-index: 10; /* Z-index maior no hover */
+        }
+        
+        /* Container para os skills para evitar sobreposição */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            grid-gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .skills-container .skill-pill {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            height: auto;
+            overflow: visible;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transform: translateZ(0);
+            text-align: left;
         }
 
         /* Progress Bar */
@@ -357,23 +381,40 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(var(--background-rgb), 0.6); /* Camada semi-transparente */
-            z-index: -1;
+            background-color: rgba(var(--background-rgb), 0.7); /* Camada semi-transparente */
+            z-index: 1;
         }
         
         #hero {
             position: relative;
         }
         
-        #hero::after {
+        #hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(var(--background-rgb), 0.8); /* Camada semi-transparente */
-            z-index: -1;
+            background-color: rgba(var(--background-rgb), 0.9);
+            z-index: 1;
+        }
+        
+        #hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        #hero h1 {
+            color: var(--primary);
+            font-weight: 700;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        #hero h2 {
+            font-weight: 700;
+            color: var(--text-primary);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
 
         /* Mobile menu */
@@ -384,6 +425,55 @@
         /* Contact form inputs com mais opacidade */
         .form-input {
             background-color: rgba(var(--background-rgb), 0.95) !important;
+        }
+
+        #particles-container {
+            z-index: -1 !important;
+            opacity: 0.3 !important;
+            display: block !important;
+            visibility: visible !important;
+        }
+        
+        #particles-container canvas {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .section-card {
+            position: relative !important;
+            z-index: 2 !important;
+        }
+        
+        .skill-pill {
+            position: relative !important;
+            z-index: 1;
+        }
+        
+        .skill-pill:hover {
+            z-index: 10 !important;
+        }
+
+        #hero p {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        #hero .animated-btn {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        
+        /* Aumentar contraste de todos elementos de texto */
+        .text-secondary {
+            color: var(--text-primary) !important;
+            font-weight: 500;
+        }
+
+        /* Code block com mais contraste */
+        #hero .relative pre {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
         }
     </style>
 </head>
@@ -436,8 +526,8 @@
     </nav>
 
     <!-- Hero Section -->
-    <header id="hero" class="min-h-screen flex items-center pt-16" style="background-color: var(--background);">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <header id="hero" class="min-h-screen flex items-center pt-16" style="background-color: rgba(var(--background-rgb), 0.95);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 container">
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div class="animate__animated animate__fadeInLeft">
                     <p class="text-lg font-medium mb-2" style="color: var(--primary);">Hi, I'm</p>
@@ -472,7 +562,7 @@
                 
                 <div class="animate__animated animate__fadeInRight">
                     <div class="relative">
-                        <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 transform rotate-6 rounded-lg"></div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 transform rotate-6 rounded-lg" style="opacity: 0.9;"></div>
                         <div class="relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg" style="background-color: var(--card-bg);">
                             <div class="flex items-center mb-4">
                                 <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
@@ -690,11 +780,24 @@
                 <h2 class="text-3xl font-bold mb-8 text-center">Education</h2>
                 
                 <div class="relative" style="opacity: 1 !important;">
-                    <!-- BSc Education Entry -->
+                    <!-- Post Graduate Education Entry -->
                     <div class="timeline-container" style="opacity: 1 !important;">
                         <div class="timeline-line" style="opacity: 1 !important; visibility: visible;"></div>
                         <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
                         <div class="mb-12">
+                            <div class="flex flex-wrap justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">Post-Graduate Specialization in Software Quality Management</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--secondary); color: white;">May 2022 - Sep 2022</span>
+                            </div>
+                            <p class="mb-4" style="color: var(--text-secondary);">Faculdade UniBF</p>
+                        </div>
+                    </div>
+                    
+                    <!-- BSc Education Entry -->
+                    <div class="timeline-container" style="opacity: 1 !important;">
+                        <div class="timeline-line" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
+                        <div>
                             <div class="flex flex-wrap justify-between items-start mb-2">
                                 <h3 class="text-xl font-bold">BSc Computer Science</h3>
                                 <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--secondary); color: white;">2016 - 2021</span>
@@ -706,19 +809,6 @@
                                     <span>Bachelor's degree in Computer Science</span>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Post Graduate Education Entry -->
-                    <div class="timeline-container" style="opacity: 1 !important;">
-                        <div class="timeline-line" style="opacity: 1 !important; visibility: visible;"></div>
-                        <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
-                        <div>
-                            <div class="flex flex-wrap justify-between items-start mb-2">
-                                <h3 class="text-xl font-bold">Post-Graduate Specialization in Software Quality Management</h3>
-                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--secondary); color: white;">May 2022 - Sep 2022</span>
-                            </div>
-                            <p class="mb-4" style="color: var(--text-secondary);">Faculdade UniBF</p>
                         </div>
                     </div>
                     
@@ -759,7 +849,7 @@
                 
                 <div class="mb-12">
                     <h3 class="text-xl font-bold mb-4">Testing Frameworks & Tools</h3>
-                    <div class="flex flex-wrap" style="opacity: 1 !important; visibility: visible !important;">
+                    <div class="skills-container" style="opacity: 1 !important; visibility: visible !important;">
                         <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
                             <i class="fas fa-check-circle mr-2"></i> Selenium
                         </div>
@@ -1445,11 +1535,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
     
-    <!-- Particles Animation -->
-    <script src="particles.js"></script>
-    
-    <!-- Game Animation -->
-    <script src="game.js"></script>
+    <!-- Novo fundo elegante -->
+    <script src="background.js"></script>
+    <!-- Fix para constelações -->
+    <script src="constellation-fix.js"></script>
     
     <!-- Correção para elementos visíveis -->
     <script>
@@ -1458,13 +1547,32 @@
         function forceElementsVisibility() {
             console.log('Forçando visibilidade dos elementos');
             
-            // Correção para partículas
-            const particlesContainer = document.getElementById('particles-container');
-            if (particlesContainer) {
-                particlesContainer.style.zIndex = '1';
-                particlesContainer.style.opacity = '0.8'; 
-                console.log('Ajustando z-index e opacidade das partículas para garantir visibilidade');
+            // Verificar fundo animado
+            const bgContainer = document.getElementById('background-container');
+            if (!bgContainer) {
+                console.log('Container de fundo não encontrado - criando');
+                const newContainer = document.createElement('div');
+                newContainer.id = 'background-container';
+                document.body.insertBefore(newContainer, document.body.firstChild);
             }
+            
+            // Corrigir z-index das seções
+            document.querySelectorAll('.section-card').forEach(function(section) {
+                section.style.zIndex = '2';
+                section.style.position = 'relative';
+            });
+            
+            // Corrigir z-index dos skill-pills
+            document.querySelectorAll('.skill-pill').forEach(function(pill) {
+                pill.style.position = 'relative';
+                pill.style.zIndex = '1';
+                // Remover qualquer evento anterior
+                pill.removeEventListener('mouseover', skillPillMouseOver);
+                pill.removeEventListener('mouseout', skillPillMouseOut);
+                // Adicionar novos eventos
+                pill.addEventListener('mouseover', skillPillMouseOver);
+                pill.addEventListener('mouseout', skillPillMouseOut);
+            });
             
             // Corrigir elementos de projeto
             const projectCards = document.querySelectorAll('.project-card, .project-image, .project-content');
@@ -1518,20 +1626,330 @@
                     visibility: visible !important;
                 }
                 
-                #particles-container {
-                    z-index: 1 !important;
-                    opacity: 0.8 !important;
+                #background-container {
+                    z-index: -1 !important;
                     display: block !important;
                     visibility: visible !important;
                 }
                 
+                /* Removendo referência ao container antigo */
+                /*
                 #particles-container canvas {
                     display: block !important;
                     visibility: visible !important;
                     opacity: 1 !important;
                 }
+                */
+                
+                .section-card {
+                    position: relative !important;
+                    z-index: 2 !important;
+                }
+                
+                .skill-pill {
+                    position: relative !important;
+                    z-index: 1;
+                }
+                
+                .skill-pill:hover {
+                    z-index: 10 !important;
+                }
             `;
             document.head.appendChild(styleFixElement);
+        }
+        
+        // Funções para eventos dos skill-pills
+        function skillPillMouseOver() {
+            this.style.zIndex = '10';
+        }
+        
+        function skillPillMouseOut() {
+            this.style.zIndex = '1';
+        }
+        
+        // Executar no carregamento e após um intervalo
+        forceElementsVisibility();
+        setTimeout(forceElementsVisibility, 500);
+        setTimeout(forceElementsVisibility, 1000);
+        
+        // Verificar e ajustar quando o layout for redimensionado
+        window.addEventListener('resize', forceElementsVisibility);
+    });
+    </script>
+    
+    <!-- Fundo de constelações inline -->
+    <script>
+    (function() {
+        console.log('Inicializando efeito de constelações inline direto no HTML');
+        
+        // Criar elemento de fundo
+        const bgContainer = document.createElement('div');
+        bgContainer.id = 'stars-bg';
+        bgContainer.style.cssText = 
+            'position: fixed !important;' +
+            'top: 0 !important;' +
+            'left: 0 !important;' +
+            'width: 100vw !important;' +
+            'height: 100vh !important;' +
+            'z-index: -9999 !important;' +
+            'background: linear-gradient(135deg, #080c18, #1a1a2e) !important;' +
+            'pointer-events: none !important;' +
+            'display: block !important;' +
+            'visibility: visible !important;' +
+            'opacity: 1 !important;';
+        
+        // Inserir no início do body
+        document.body.insertBefore(bgContainer, document.body.firstChild);
+        
+        // Criar canvas
+        const canvas = document.createElement('canvas');
+        canvas.style.cssText = 
+            'position: absolute !important;' +
+            'top: 0 !important;' +
+            'left: 0 !important;' +
+            'width: 100% !important;' +
+            'height: 100% !important;' +
+            'display: block !important;' +
+            'visibility: visible !important;' +
+            'opacity: 1 !important;';
+        bgContainer.appendChild(canvas);
+        
+        // Configurar canvas
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const ctx = canvas.getContext('2d');
+        
+        // Criar estrelas
+        const stars = [];
+        const starCount = 150;
+        
+        for (let i = 0; i < starCount; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2 + 1,
+                speed: {
+                    x: (Math.random() - 0.5) * 0.3,
+                    y: (Math.random() - 0.5) * 0.3
+                },
+                color: ['#4cc9f0', '#4895ef', '#4361ee', '#3f37c9', '#7209b7'][Math.floor(Math.random() * 5)],
+                flickerPhase: Math.random() * Math.PI * 2
+            });
+        }
+        
+        // Animação
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Desenhar estrelas
+            stars.forEach(star => {
+                // Mover
+                star.x += star.speed.x;
+                star.y += star.speed.y;
+                
+                // Cintilação
+                star.flickerPhase += 0.05;
+                const flicker = Math.sin(star.flickerPhase) * 0.5;
+                const currentSize = star.size + flicker * 0.5;
+                
+                // Reposicionar se sair da tela
+                if (star.x < -50) star.x = canvas.width + 50;
+                if (star.x > canvas.width + 50) star.x = -50;
+                if (star.y < -50) star.y = canvas.height + 50;
+                if (star.y > canvas.height + 50) star.y = -50;
+                
+                // Desenhar
+                ctx.beginPath();
+                ctx.fillStyle = star.color;
+                ctx.arc(star.x, star.y, currentSize, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            
+            // Desenhar linhas
+            ctx.strokeStyle = 'rgba(100, 150, 255, 0.2)';
+            ctx.lineWidth = 1;
+            
+            for (let i = 0; i < stars.length; i++) {
+                for (let j = i + 1; j < stars.length; j++) {
+                    const dx = stars[i].x - stars[j].x;
+                    const dy = stars[i].y - stars[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 150) {
+                        const opacity = 1 - distance / 150;
+                        ctx.strokeStyle = `rgba(100, 150, 255, ${opacity * 0.2})`;
+                        
+                        ctx.beginPath();
+                        ctx.moveTo(stars[i].x, stars[i].y);
+                        ctx.lineTo(stars[j].x, stars[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        // Iniciar animação
+        animate();
+        
+        // Redimensionar ao ajustar a janela
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Adicionar estilo para forçar exibição
+        const style = document.createElement('style');
+        style.textContent = `
+            #stars-bg {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                z-index: -9999 !important;
+                background: linear-gradient(135deg, #080c18, #1a1a2e) !important;
+                pointer-events: none !important;
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+            
+            body > *:not(#stars-bg) {
+                position: relative !important;
+                z-index: 1 !important;
+            }
+        `;
+        document.head.appendChild(style);
+    })();
+    </script>
+    
+    <!-- Correção para elementos visíveis -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Função para garantir visibilidade dos elementos
+        function forceElementsVisibility() {
+            console.log('Forçando visibilidade dos elementos');
+            
+            // Verificar fundo animado
+            const bgContainer = document.getElementById('background-container');
+            if (!bgContainer) {
+                console.log('Container de fundo não encontrado - criando');
+                const newContainer = document.createElement('div');
+                newContainer.id = 'background-container';
+                document.body.insertBefore(newContainer, document.body.firstChild);
+            }
+            
+            // Corrigir z-index das seções
+            document.querySelectorAll('.section-card').forEach(function(section) {
+                section.style.zIndex = '2';
+                section.style.position = 'relative';
+            });
+            
+            // Corrigir z-index dos skill-pills
+            document.querySelectorAll('.skill-pill').forEach(function(pill) {
+                pill.style.position = 'relative';
+                pill.style.zIndex = '1';
+                // Remover qualquer evento anterior
+                pill.removeEventListener('mouseover', skillPillMouseOver);
+                pill.removeEventListener('mouseout', skillPillMouseOut);
+                // Adicionar novos eventos
+                pill.addEventListener('mouseover', skillPillMouseOver);
+                pill.addEventListener('mouseout', skillPillMouseOut);
+            });
+            
+            // Corrigir elementos de projeto
+            const projectCards = document.querySelectorAll('.project-card, .project-image, .project-content');
+            projectCards.forEach(function(el) {
+                el.style.cssText = 'opacity: 1 !important; visibility: visible !important; transform: none !important; display: block !important;';
+            });
+            
+            // Corrigir barras de progresso
+            const progressBars = document.querySelectorAll('.progress-bar, .progress-fill');
+            progressBars.forEach(function(el) {
+                el.style.cssText = 'opacity: 1 !important; visibility: visible !important; display: block !important;';
+            });
+            
+            // Confirmar que as larguras das barras de progresso estão definidas
+            document.querySelectorAll('.progress-fill').forEach(function(el) {
+                const currentWidth = el.style.width;
+                if (currentWidth) {
+                    el.style.width = currentWidth;
+                }
+            });
+            
+            // Adicionar estilos CSS diretos
+            const styleFixElement = document.createElement('style');
+            styleFixElement.innerHTML = `
+                .progress-fill { 
+                    opacity: 1 !important; 
+                    visibility: visible !important;
+                }
+                .progress-fill[style*="width: 90%"] { width: 90% !important; }
+                .progress-fill[style*="width: 80%"] { width: 80% !important; }
+                .progress-fill[style*="width: 70%"] { width: 70% !important; }
+                .progress-fill[style*="width: 85%"] { width: 85% !important; }
+                .progress-fill[style*="width: 100%"] { width: 100% !important; }
+                
+                .project-card {
+                    display: block !important;
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                    transform: none !important;
+                }
+                
+                .project-image {
+                    display: block !important;
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                }
+                
+                .project-content {
+                    display: block !important;
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                }
+                
+                #background-container {
+                    z-index: -1 !important;
+                    display: block !important;
+                    visibility: visible !important;
+                }
+                
+                /* Removendo referência ao container antigo */
+                /*
+                #particles-container canvas {
+                    display: block !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                }
+                */
+                
+                .section-card {
+                    position: relative !important;
+                    z-index: 2 !important;
+                }
+                
+                .skill-pill {
+                    position: relative !important;
+                    z-index: 1;
+                }
+                
+                .skill-pill:hover {
+                    z-index: 10 !important;
+                }
+            `;
+            document.head.appendChild(styleFixElement);
+        }
+        
+        // Funções para eventos dos skill-pills
+        function skillPillMouseOver() {
+            this.style.zIndex = '10';
+        }
+        
+        function skillPillMouseOut() {
+            this.style.zIndex = '1';
         }
         
         // Executar no carregamento e após um intervalo

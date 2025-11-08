@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -475,6 +475,45 @@
             border: 1px solid var(--border-color);
             box-shadow: 0 8px 30px rgba(0,0,0,0.15);
         }
+        
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-left: 1rem;
+        }
+        
+        .lang-btn {
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            border: 2px solid var(--border-color);
+            background-color: transparent;
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+        }
+        
+        .lang-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .lang-btn.active-lang {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .lang-switcher {
+                margin-left: 0;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body data-theme="light">
@@ -488,11 +527,15 @@
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);">About</a>
-                    <a href="#experience" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);">Experience</a>
-                    <a href="#skills" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);">Skills</a>
-                    <a href="#projects" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);">Projects</a>
-                    <a href="#contact" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);">Contact</a>
+                    <a href="#about" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);" data-i18n="nav_about">About</a>
+                    <a href="#experience" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);" data-i18n="nav_experience">Experience</a>
+                    <a href="#skills" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);" data-i18n="nav_skills">Skills</a>
+                    <a href="#projects" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);" data-i18n="nav_projects">Projects</a>
+                    <a href="#contact" class="hover:text-blue-500 transition-colors" style="color: var(--text-primary);" data-i18n="nav_contact">Contact</a>
+                    <div class="lang-switcher">
+                        <button class="lang-btn" data-lang="pt">PT</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                    </div>
                     <label class="theme-switch">
                         <input type="checkbox" id="theme-toggle">
                         <span class="slider"></span>
@@ -510,12 +553,16 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden" style="background-color: var(--background);">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">About</a>
-                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Experience</a>
-                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Skills</a>
-                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Projects</a>
-                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Contact</a>
-                <div class="px-3 py-2">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);" data-i18n="nav_about">About</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);" data-i18n="nav_experience">Experience</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);" data-i18n="nav_skills">Skills</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);" data-i18n="nav_projects">Projects</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);" data-i18n="nav_contact">Contact</a>
+                <div class="px-3 py-2 flex items-center gap-4">
+                    <div class="lang-switcher">
+                        <button class="lang-btn" data-lang="pt">PT</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                    </div>
                     <label class="theme-switch">
                         <input type="checkbox" id="mobile-theme-toggle">
                         <span class="slider"></span>
@@ -530,20 +577,20 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 container">
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div class="animate__animated animate__fadeInLeft">
-                    <p class="text-lg font-medium mb-2" style="color: var(--primary);">Hi, I'm</p>
-                    <h1 class="text-5xl md:text-6xl font-bold mb-4">Enok Rocha</h1>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">I break things for a living — on purpose.</h2>
-                    <p class="text-xl mb-8" style="color: var(--text-secondary);">Test Automation Analyst with an eye for detail and a passion for delivering flawless software. I transform chaos into quality.</p>
+                    <p class="text-lg font-medium mb-2" style="color: var(--primary);" data-i18n="hero_greeting">Hi, I'm</p>
+                    <h1 class="text-5xl md:text-6xl font-bold mb-4" data-i18n="hero_name">Enok Rocha</h1>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4" data-i18n="hero_title">I break things for a living — on purpose.</h2>
+                    <p class="text-xl mb-8" style="color: var(--text-secondary);" data-i18n="hero_description">Test Automation Analyst with an eye for detail and a passion for delivering flawless software. I transform chaos into quality.</p>
                     
                     <div class="flex flex-wrap gap-4">
                         <a href="#" class="animated-btn" id="download-resume">
-                            <i class="fas fa-download mr-2"></i> Download Resume
+                            <i class="fas fa-download mr-2"></i> <span data-i18n="hero_download_resume">Download Resume</span>
                         </a>
                         <a href="#contact" class="animated-btn" style="background-color: var(--secondary);">
-                            <i class="fas fa-envelope mr-2"></i> Contact Me
+                            <i class="fas fa-envelope mr-2"></i> <span data-i18n="hero_contact_me">Contact Me</span>
                         </a>
                         <a href="#experience" class="animated-btn timeline-btn" style="background-color: var(--primary); color: white;">
-                            <i class="fas fa-history mr-2"></i> View Timeline
+                            <i class="fas fa-history mr-2"></i> <span data-i18n="hero_view_timeline">View Timeline</span>
                         </a>
                     </div>
                     
@@ -594,28 +641,28 @@
     <section id="about" class="py-20" style="background-color: var(--background);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="section-card">
-                <h2 class="text-3xl font-bold mb-8 text-center">About Me</h2>
+                <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="about_title">About Me</h2>
                 
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div>
-                        <p class="mb-4" style="color: var(--text-primary);">
+                        <p class="mb-4" style="color: var(--text-primary);" data-i18n="about_p1">
                             I'm a dedicated Test Automation Analyst currently working at Base2 Tecnologia. With a background in Computer Science from UFMG and specialized studies in Software Quality Management, I've developed a strong foundation in ensuring software excellence.
                         </p>
-                        <p class="mb-4" style="color: var(--text-primary);">
+                        <p class="mb-4" style="color: var(--text-primary);" data-i18n="about_p2">
                             I'm passionate about technology, mathematics, and solving logical problems. My approach combines technical expertise with a deep understanding of user experience and business needs. I believe that quality is not just about finding bugs, but about delivering a seamless product that exceeds expectations.
                         </p>
-                        <p class="mb-4" style="color: var(--text-primary);">
+                        <p class="mb-4" style="color: var(--text-primary);" data-i18n="about_p3">
                             My experience spans from API testing with tools like Postman and Swagger to automation with Selenide and Rest Assured. I've worked with BDD frameworks and collaborated closely with development teams in a shift-left testing approach to ensure quality from the start.
                         </p>
                         
                         <div class="grid grid-cols-2 gap-4 mt-8">
                             <div>
                                 <p class="text-4xl font-bold" style="color: var(--primary);">4+</p>
-                                <p style="color: var(--text-secondary);">Years Experience</p>
+                                <p style="color: var(--text-secondary);" data-i18n="about_years_exp">Years Experience</p>
                             </div>
                             <div>
                                 <p class="text-4xl font-bold" style="color: var(--primary);">3+</p>
-                                <p style="color: var(--text-secondary);">Companies</p>
+                                <p style="color: var(--text-secondary);" data-i18n="about_companies">Companies</p>
                             </div>
                         </div>
                     </div>
@@ -639,7 +686,7 @@
     <section id="experience" class="py-20" style="background-color: var(--background);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="section-card">
-                <h2 class="text-3xl font-bold mb-8 text-center">Professional Timeline</h2>
+                <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="exp_title">Professional Timeline</h2>
                 
                 <div class="relative" style="opacity: 1 !important;">
                     <!-- Timeline container -->
@@ -648,22 +695,22 @@
                         <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
                         <div class="mb-12">
                             <div class="flex flex-wrap justify-between items-start mb-2">
-                                <h3 class="text-xl font-bold">Test Automation Analyst at Base2 Tecnologia</h3>
-                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;">Oct 2023 - Present</span>
+                                <h3 class="text-xl font-bold" data-i18n="exp_job1_title">Test Automation Analyst at Base2 Tecnologia</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;" data-i18n="exp_job1_period">Oct 2023 - Present</span>
                             </div>
-                            <p class="mb-4" style="color: var(--text-secondary);">Leading quality automation initiatives for banking applications</p>
+                            <p class="mb-4" style="color: var(--text-secondary);" data-i18n="exp_job1_desc">Leading quality automation initiatives for banking applications</p>
                             <ul class="space-y-2">
                                 <li class="flex items-start">
                                     <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
-                                    <span>Focal point for Cheque-related demands, working on automation with Rest Assured</span>
+                                    <span data-i18n="exp_job1_item1">Focal point for Cheque-related demands, working on automation with Rest Assured</span>
                                 </li>
                                 <li class="flex items-start">
                                     <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
-                                    <span>Focal point for frontend tests, automated using Selenide</span>
+                                    <span data-i18n="exp_job1_item2">Focal point for frontend tests, automated using Selenide</span>
                                 </li>
                                 <li class="flex items-start">
                                     <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
-                                    <span>Daily monitoring of regression tests, identifying environment issues and potential performance improvements</span>
+                                    <span data-i18n="exp_job1_item3">Daily monitoring of regression tests, identifying environment issues and potential performance improvements</span>
                                 </li>
                             </ul>
                         </div>
@@ -675,22 +722,22 @@
                         <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
                         <div class="mb-12">
                             <div class="flex flex-wrap justify-between items-start mb-2">
-                                <h3 class="text-xl font-bold">Quality Assurance Engineer III at OPUS Software</h3>
-                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;">Jun 2023 - Oct 2023</span>
+                                <h3 class="text-xl font-bold" data-i18n="exp_job2_title">Quality Assurance Engineer III at OPUS Software</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;" data-i18n="exp_job2_period">Jun 2023 - Oct 2023</span>
                             </div>
-                            <p class="mb-4" style="color: var(--text-secondary);">Worked on projects focused on regulatory demands for Open Finance and Open Insurance</p>
+                            <p class="mb-4" style="color: var(--text-secondary);" data-i18n="exp_job2_desc">Worked on projects focused on regulatory demands for Open Finance and Open Insurance</p>
                             <ul class="space-y-2">
                                 <li class="flex items-start">
                                     <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
-                                    <span>Planning and executing API tests using tools like Postman and Swagger</span>
+                                    <span data-i18n="exp_job2_item1">Planning and executing API tests using tools like Postman and Swagger</span>
                                 </li>
                                 <li class="flex items-start">
                                     <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
-                                    <span>Writing automated test resource files (feature files) using a Gherkin/BDD-based framework</span>
+                                    <span data-i18n="exp_job2_item2">Writing automated test resource files (feature files) using a Gherkin/BDD-based framework</span>
                                 </li>
                                 <li class="flex items-start">
                                     <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
-                                    <span>Actively participating in planning sessions with development team in a shift-left testing approach</span>
+                                    <span data-i18n="exp_job2_item3">Actively participating in planning sessions with development team in a shift-left testing approach</span>
                                 </li>
                             </ul>
                         </div>
@@ -702,18 +749,18 @@
                         <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
                         <div class="mb-12">
                             <div class="flex flex-wrap justify-between items-start mb-2">
-                                <h3 class="text-xl font-bold">Quality Assurance Engineer II at OPUS Software</h3>
-                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;">Nov 2022 - Jun 2023</span>
+                                <h3 class="text-xl font-bold" data-i18n="exp_job3_title">Quality Assurance Engineer II at OPUS Software</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;" data-i18n="exp_job3_period">Nov 2022 - Jun 2023</span>
                             </div>
-                            <p class="mb-4" style="color: var(--text-secondary);">Continued work on Open Finance and Open Insurance regulatory projects</p>
+                            <p class="mb-4" style="color: var(--text-secondary);" data-i18n="exp_job3_desc">Continued work on Open Finance and Open Insurance regulatory projects</p>
                             <ul class="space-y-2">
                                 <li class="flex items-start">
                                     <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
-                                    <span>Created written evidence and test reports to document testing activities</span>
+                                    <span data-i18n="exp_job3_item1">Created written evidence and test reports to document testing activities</span>
                                 </li>
                                 <li class="flex items-start">
                                     <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
-                                    <span>Implemented BDD testing practices with Gherkin syntax</span>
+                                    <span data-i18n="exp_job3_item2">Implemented BDD testing practices with Gherkin syntax</span>
                                 </li>
                             </ul>
                         </div>
@@ -725,22 +772,22 @@
                         <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
                         <div class="mb-12">
                             <div class="flex flex-wrap justify-between items-start mb-2">
-                                <h3 class="text-xl font-bold">Quality Assurance Engineer I at OPUS Software</h3>
-                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;">Feb 2022 - Nov 2022</span>
+                                <h3 class="text-xl font-bold" data-i18n="exp_job4_title">Quality Assurance Engineer I at OPUS Software</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;" data-i18n="exp_job4_period">Feb 2022 - Nov 2022</span>
                             </div>
-                            <p class="mb-4" style="color: var(--text-secondary);">Worked on projects for BRK Ambiental and PagBem</p>
+                            <p class="mb-4" style="color: var(--text-secondary);" data-i18n="exp_job4_desc">Worked on projects for BRK Ambiental and PagBem</p>
                             <ul class="space-y-2">
                                 <li class="flex items-start">
                                     <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
-                                    <span>Conducted API, E2E, and mobile testing using Agile methodologies (Scrum/Kanban)</span>
+                                    <span data-i18n="exp_job4_item1">Conducted API, E2E, and mobile testing using Agile methodologies (Scrum/Kanban)</span>
                                 </li>
                                 <li class="flex items-start">
                                     <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
-                                    <span>Maintained test automation framework using Appium for mobile testing</span>
+                                    <span data-i18n="exp_job4_item2">Maintained test automation framework using Appium for mobile testing</span>
                                 </li>
                                 <li class="flex items-start">
                                     <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
-                                    <span>Used Jira and Zephyr for test documentation, and Swagger for API testing</span>
+                                    <span data-i18n="exp_job4_item3">Used Jira and Zephyr for test documentation, and Swagger for API testing</span>
                                 </li>
                             </ul>
                         </div>
@@ -752,18 +799,18 @@
                         <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
                         <div class="mb-12">
                             <div class="flex flex-wrap justify-between items-start mb-2">
-                                <h3 class="text-xl font-bold">Junior Development Analyst at Synergia</h3>
-                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;">Oct 2021 - Jan 2022</span>
+                                <h3 class="text-xl font-bold" data-i18n="exp_job5_title">Junior Development Analyst at Synergia</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--primary); color: white;" data-i18n="exp_job5_period">Oct 2021 - Jan 2022</span>
                             </div>
-                            <p class="mb-4" style="color: var(--text-secondary);">Development for the State of Minas Gerais Procurement Portal</p>
+                            <p class="mb-4" style="color: var(--text-secondary);" data-i18n="exp_job5_desc">Development for the State of Minas Gerais Procurement Portal</p>
                             <ul class="space-y-2">
                                 <li class="flex items-start">
                                     <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
-                                    <span>Developed features and rewrote code for new technologies, primarily for the auction system</span>
+                                    <span data-i18n="exp_job5_item1">Developed features and rewrote code for new technologies, primarily for the auction system</span>
                                 </li>
                                 <li class="flex items-start">
                                     <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
-                                    <span>Worked with Java, React, TomCat, Maven, JSP, Jenkins, JUnit, Spring, and Hibernate</span>
+                                    <span data-i18n="exp_job5_item2">Worked with Java, React, TomCat, Maven, JSP, Jenkins, JUnit, Spring, and Hibernate</span>
                                 </li>
                             </ul>
                         </div>
@@ -777,7 +824,7 @@
     <section id="education" class="py-20" style="background-color: var(--background);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="section-card">
-                <h2 class="text-3xl font-bold mb-8 text-center">Education</h2>
+                <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="edu_title">Education</h2>
                 
                 <div class="relative" style="opacity: 1 !important;">
                     <!-- Post Graduate Education Entry -->
@@ -786,10 +833,10 @@
                         <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
                         <div class="mb-12">
                             <div class="flex flex-wrap justify-between items-start mb-2">
-                                <h3 class="text-xl font-bold">Post-Graduate Specialization in Software Quality Management</h3>
-                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--secondary); color: white;">May 2022 - Sep 2022</span>
+                                <h3 class="text-xl font-bold" data-i18n="edu_post_grad">Post-Graduate Specialization in Software Quality Management</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--secondary); color: white;" data-i18n="edu_post_grad_period">May 2022 - Sep 2022</span>
                             </div>
-                            <p class="mb-4" style="color: var(--text-secondary);">Faculdade UniBF</p>
+                            <p class="mb-4" style="color: var(--text-secondary);" data-i18n="edu_post_grad_institution">Faculdade UniBF</p>
                         </div>
                     </div>
                     
@@ -799,14 +846,14 @@
                         <div class="timeline-dot" style="opacity: 1 !important; visibility: visible;"></div>
                         <div>
                             <div class="flex flex-wrap justify-between items-start mb-2">
-                                <h3 class="text-xl font-bold">BSc Computer Science</h3>
-                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--secondary); color: white;">2016 - 2021</span>
+                                <h3 class="text-xl font-bold" data-i18n="edu_bsc">BSc Computer Science</h3>
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold" style="background-color: var(--secondary); color: white;" data-i18n="edu_bsc_period">2016 - 2021</span>
                             </div>
-                            <p class="mb-4" style="color: var(--text-secondary);">Federal University of Minas Gerais (UFMG)</p>
+                            <p class="mb-4" style="color: var(--text-secondary);" data-i18n="edu_bsc_institution">Federal University of Minas Gerais (UFMG)</p>
                             <ul class="space-y-2">
                                 <li class="flex items-start">
                                     <span class="inline-block mt-1 mr-2" style="color: var(--success);"><i class="fas fa-check-circle"></i></span>
-                                    <span>Bachelor's degree in Computer Science</span>
+                                    <span data-i18n="edu_bsc_item">Bachelor's degree in Computer Science</span>
                                 </li>
                             </ul>
                         </div>
@@ -814,12 +861,12 @@
                     
                     <!-- Languages -->
                     <div class="mt-12">
-                        <h3 class="text-xl font-bold mb-4">Languages</h3>
+                        <h3 class="text-xl font-bold mb-4" data-i18n="edu_languages_title">Languages</h3>
                         
                         <div class="mb-6">
                             <div class="flex justify-between mb-1">
-                                <span>English</span>
-                                <span>Professional Working Proficiency</span>
+                                <span data-i18n="edu_english">English</span>
+                                <span data-i18n="edu_english_level">Professional Working Proficiency</span>
                             </div>
                             <div class="progress-bar">
                                 <div class="progress-fill" style="width: 75%"></div>
@@ -828,8 +875,8 @@
                         
                         <div>
                             <div class="flex justify-between mb-1">
-                                <span>Portuguese</span>
-                                <span>Native</span>
+                                <span data-i18n="edu_portuguese">Portuguese</span>
+                                <span data-i18n="edu_portuguese_level">Native</span>
                             </div>
                             <div class="progress-bar">
                                 <div class="progress-fill" style="width: 100%"></div>
@@ -845,10 +892,10 @@
     <section id="skills" class="py-20" style="background-color: var(--background);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="section-card">
-                <h2 class="text-3xl font-bold mb-8 text-center">Technical Expertise</h2>
+                <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="skills_title">Technical Expertise</h2>
                 
                 <div class="mb-12">
-                    <h3 class="text-xl font-bold mb-4">Testing Frameworks & Tools</h3>
+                    <h3 class="text-xl font-bold mb-4" data-i18n="skills_testing_frameworks">Testing Frameworks & Tools</h3>
                     <div class="skills-container" style="opacity: 1 !important; visibility: visible !important;">
                         <div class="skill-pill" style="opacity: 1 !important; visibility: visible !important;">
                             <i class="fas fa-check-circle mr-2"></i> Selenium
@@ -902,7 +949,7 @@
                 </div>
                 
                 <div class="mb-12">
-                    <h3 class="text-xl font-bold mb-4">Programming Languages & Frameworks</h3>
+                    <h3 class="text-xl font-bold mb-4" data-i18n="skills_programming">Programming Languages & Frameworks</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <div class="flex justify-between mb-1">
@@ -944,60 +991,60 @@
                 </div>
                 
                 <div class="mb-12">
-                    <h3 class="text-xl font-bold mb-4">Methodologies & Best Practices</h3>
+                    <h3 class="text-xl font-bold mb-4" data-i18n="skills_methodologies">Methodologies & Best Practices</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="border p-4 rounded-lg" style="border-color: var(--border-color);">
                             <div class="text-center mb-4">
                                 <i class="fas fa-sync text-4xl" style="color: var(--primary);"></i>
                             </div>
-                            <h4 class="text-lg font-semibold text-center mb-2">Agile Testing</h4>
-                            <p class="text-center" style="color: var(--text-secondary);">Experienced in Scrum and Kanban frameworks</p>
+                            <h4 class="text-lg font-semibold text-center mb-2" data-i18n="skills_agile_title">Agile Testing</h4>
+                            <p class="text-center" style="color: var(--text-secondary);" data-i18n="skills_agile_desc">Experienced in Scrum and Kanban frameworks</p>
                         </div>
                         
                         <div class="border p-4 rounded-lg" style="border-color: var(--border-color);">
                             <div class="text-center mb-4">
                                 <i class="fas fa-vial text-4xl" style="color: var(--primary);"></i>
                             </div>
-                            <h4 class="text-lg font-semibold text-center mb-2">BDD/TDD</h4>
-                            <p class="text-center" style="color: var(--text-secondary);">Behavior & Test Driven Development expert</p>
+                            <h4 class="text-lg font-semibold text-center mb-2" data-i18n="skills_bdd_title">BDD/TDD</h4>
+                            <p class="text-center" style="color: var(--text-secondary);" data-i18n="skills_bdd_desc">Behavior & Test Driven Development expert</p>
                         </div>
                         
                         <div class="border p-4 rounded-lg" style="border-color: var(--border-color);">
                             <div class="text-center mb-4">
                                 <i class="fas fa-search text-4xl" style="color: var(--primary);"></i>
                             </div>
-                            <h4 class="text-lg font-semibold text-center mb-2">Exploratory Testing</h4>
-                            <p class="text-center" style="color: var(--text-secondary);">Thorough and systematic approach to discovery</p>
+                            <h4 class="text-lg font-semibold text-center mb-2" data-i18n="skills_exploratory_title">Exploratory Testing</h4>
+                            <p class="text-center" style="color: var(--text-secondary);" data-i18n="skills_exploratory_desc">Thorough and systematic approach to discovery</p>
                         </div>
                     </div>
                 </div>
                 
                 <div>
-                    <h3 class="text-xl font-bold mb-4">Certifications</h3>
+                    <h3 class="text-xl font-bold mb-4" data-i18n="skills_certifications">Certifications</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div class="cert-card">
-                            <h4 class="font-semibold mb-1">Testes Automáticos</h4>
-                            <p style="color: var(--text-secondary);">Automation Testing</p>
+                            <h4 class="font-semibold mb-1" data-i18n="skills_cert1">Testes Automáticos</h4>
+                            <p style="color: var(--text-secondary);" data-i18n="skills_cert1_desc">Automation Testing</p>
                         </div>
                         
                         <div class="cert-card">
-                            <h4 class="font-semibold mb-1">Manipulando o D.O.M. com Javascript</h4>
-                            <p style="color: var(--text-secondary);">JavaScript DOM Manipulation</p>
+                            <h4 class="font-semibold mb-1" data-i18n="skills_cert2">Manipulando o D.O.M. com Javascript</h4>
+                            <p style="color: var(--text-secondary);" data-i18n="skills_cert2_desc">JavaScript DOM Manipulation</p>
                         </div>
                         
                         <div class="cert-card">
-                            <h4 class="font-semibold mb-1">Automação de testes de API com Postman</h4>
-                            <p style="color: var(--text-secondary);">API Test Automation with Postman</p>
+                            <h4 class="font-semibold mb-1" data-i18n="skills_cert3">Automação de testes de API com Postman</h4>
+                            <p style="color: var(--text-secondary);" data-i18n="skills_cert3_desc">API Test Automation with Postman</p>
                         </div>
                         
                         <div class="cert-card">
-                            <h4 class="font-semibold mb-1">Fundamentos e prática do teste de software</h4>
-                            <p style="color: var(--text-secondary);">Software Testing Fundamentals and Practice</p>
+                            <h4 class="font-semibold mb-1" data-i18n="skills_cert4">Fundamentos e prática do teste de software</h4>
+                            <p style="color: var(--text-secondary);" data-i18n="skills_cert4_desc">Software Testing Fundamentals and Practice</p>
                         </div>
 
                         <div class="cert-card">
-                            <h4 class="font-semibold mb-1">Posicionando elementos com Flexbox em CSS</h4>
-                            <p style="color: var(--text-secondary);">CSS Flexbox Positioning</p>
+                            <h4 class="font-semibold mb-1" data-i18n="skills_cert5">Posicionando elementos com Flexbox em CSS</h4>
+                            <p style="color: var(--text-secondary);" data-i18n="skills_cert5_desc">CSS Flexbox Positioning</p>
                         </div>
                     </div>
                 </div>
@@ -1009,7 +1056,7 @@
     <section id="projects" class="py-20" style="background-color: var(--background);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="section-card">
-                <h2 class="text-3xl font-bold mb-8 text-center">Featured Projects</h2>
+                <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="projects_title">Featured Projects</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8" style="opacity: 1 !important; visibility: visible !important;">
                     <!-- Project 1 -->
@@ -1022,8 +1069,8 @@
                             </div>
                         </div>
                         <div class="project-content" style="opacity: 1 !important;">
-                            <h3 class="text-xl font-bold mb-2">Mantis Test Automation</h3>
-                            <p class="mb-4" style="color: var(--text-secondary);">Projeto de testes em Selenium para o Mantis Bug Tracker.</p>
+                            <h3 class="text-xl font-bold mb-2" data-i18n="project1_title">Mantis Test Automation</h3>
+                            <p class="mb-4" style="color: var(--text-secondary);" data-i18n="project1_desc">Projeto de testes em Selenium para o Mantis Bug Tracker.</p>
                             
                             <div class="flex flex-wrap mb-4">
                                 <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">Java</span>
@@ -1033,10 +1080,10 @@
                             
                             <div class="flex justify-between">
                                 <a href="#" class="text-sm font-medium hover:underline" style="color: var(--primary);">
-                                    <i class="fas fa-link mr-1"></i> Documentation
+                                    <i class="fas fa-link mr-1"></i> <span data-i18n="project_documentation">Documentation</span>
                                 </a>
                                 <a href="https://github.com/enokjanuario/mantisTest" target="_blank" class="text-sm font-medium hover:underline" style="color: var(--primary);">
-                                    <i class="fab fa-github mr-1"></i> Source Code
+                                    <i class="fab fa-github mr-1"></i> <span data-i18n="project_source_code">Source Code</span>
                                 </a>
                             </div>
                         </div>
@@ -1052,8 +1099,8 @@
                             </div>
                         </div>
                         <div class="project-content" style="opacity: 1 !important;">
-                            <h3 class="text-xl font-bold mb-2">ReqRes API Testing</h3>
-                            <p class="mb-4" style="color: var(--text-secondary);">Automated test suite for ReqRes REST API endpoints.</p>
+                            <h3 class="text-xl font-bold mb-2" data-i18n="project2_title">ReqRes API Testing</h3>
+                            <p class="mb-4" style="color: var(--text-secondary);" data-i18n="project2_desc">Automated test suite for ReqRes REST API endpoints.</p>
                             
                             <div class="flex flex-wrap mb-4">
                                 <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">Java</span>
@@ -1063,10 +1110,10 @@
                             
                             <div class="flex justify-between">
                                 <a href="#" class="text-sm font-medium hover:underline" style="color: var(--primary);">
-                                    <i class="fas fa-file-alt mr-1"></i> Documentation
+                                    <i class="fas fa-file-alt mr-1"></i> <span data-i18n="project_documentation">Documentation</span>
                                 </a>
                                 <a href="https://github.com/enokjanuario/ReqRes" target="_blank" class="text-sm font-medium hover:underline" style="color: var(--primary);">
-                                    <i class="fab fa-github mr-1"></i> Source Code
+                                    <i class="fab fa-github mr-1"></i> <span data-i18n="project_source_code">Source Code</span>
                                 </a>
                             </div>
                         </div>
@@ -1082,8 +1129,8 @@
                             </div>
                         </div>
                         <div class="project-content" style="opacity: 1 !important;">
-                            <h3 class="text-xl font-bold mb-2">TDD with Mocha in JavaScript</h3>
-                            <p class="mb-4" style="color: var(--text-secondary);">Test-Driven Development project using Mocha framework in JavaScript.</p>
+                            <h3 class="text-xl font-bold mb-2" data-i18n="project3_title">TDD with Mocha in JavaScript</h3>
+                            <p class="mb-4" style="color: var(--text-secondary);" data-i18n="project3_desc">Test-Driven Development project using Mocha framework in JavaScript.</p>
                             
                             <div class="flex flex-wrap mb-4">
                                 <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">JavaScript</span>
@@ -1093,10 +1140,10 @@
                             
                             <div class="flex justify-between">
                                 <a href="#" class="text-sm font-medium hover:underline" style="color: var(--primary);">
-                                    <i class="fas fa-play-circle mr-1"></i> Demo Files
+                                    <i class="fas fa-play-circle mr-1"></i> <span data-i18n="project_demo_files">Demo Files</span>
                                 </a>
                                 <a href="https://github.com/enokjanuario/qa.tdd-mocha.javascript" target="_blank" class="text-sm font-medium hover:underline" style="color: var(--primary);">
-                                    <i class="fab fa-github mr-1"></i> Source Code
+                                    <i class="fab fa-github mr-1"></i> <span data-i18n="project_source_code">Source Code</span>
                                 </a>
                             </div>
                         </div>
@@ -1112,8 +1159,8 @@
                             </div>
                         </div>
                         <div class="project-content" style="opacity: 1 !important;">
-                            <h3 class="text-xl font-bold mb-2">BDD with CucumberJS</h3>
-                            <p class="mb-4" style="color: var(--text-secondary);">Behavior-Driven Development project using CucumberJS and Gherkin.</p>
+                            <h3 class="text-xl font-bold mb-2" data-i18n="project4_title">BDD with CucumberJS</h3>
+                            <p class="mb-4" style="color: var(--text-secondary);" data-i18n="project4_desc">Behavior-Driven Development project using CucumberJS and Gherkin.</p>
                             
                             <div class="flex flex-wrap mb-4">
                                 <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">JavaScript</span>
@@ -1124,10 +1171,10 @@
                             
                             <div class="flex justify-between">
                                 <a href="#" class="text-sm font-medium hover:underline" style="color: var(--primary);">
-                                    <i class="fas fa-chart-line mr-1"></i> Test Reports
+                                    <i class="fas fa-chart-line mr-1"></i> <span data-i18n="project_test_reports">Test Reports</span>
                                 </a>
                                 <a href="https://github.com/enokjanuario/qa.bdd-cucumberjs.javascript" target="_blank" class="text-sm font-medium hover:underline" style="color: var(--primary);">
-                                    <i class="fab fa-github mr-1"></i> Source Code
+                                    <i class="fab fa-github mr-1"></i> <span data-i18n="project_source_code">Source Code</span>
                                 </a>
                             </div>
                         </div>
@@ -1143,8 +1190,8 @@
                             </div>
                         </div>
                         <div class="project-content" style="opacity: 1 !important;">
-                            <h3 class="text-xl font-bold mb-2">Automation Exercise with WebdriverIO</h3>
-                            <p class="mb-4" style="color: var(--text-secondary);">Web automation testing framework using WebdriverIO for Automation Exercise website.</p>
+                            <h3 class="text-xl font-bold mb-2" data-i18n="project5_title">Automation Exercise with WebdriverIO</h3>
+                            <p class="mb-4" style="color: var(--text-secondary);" data-i18n="project5_desc">Web automation testing framework using WebdriverIO for Automation Exercise website.</p>
                             
                             <div class="flex flex-wrap mb-4">
                                 <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">JavaScript</span>
@@ -1154,10 +1201,10 @@
                             
                             <div class="flex justify-between">
                                 <a href="#" class="text-sm font-medium hover:underline" style="color: var(--primary);">
-                                    <i class="fas fa-desktop mr-1"></i> Demo
+                                    <i class="fas fa-desktop mr-1"></i> <span data-i18n="project_demo">Demo</span>
                                 </a>
                                 <a href="https://github.com/enokjanuario/qa.automationexercise-web.webdriverio" target="_blank" class="text-sm font-medium hover:underline" style="color: var(--primary);">
-                                    <i class="fab fa-github mr-1"></i> Source Code
+                                    <i class="fab fa-github mr-1"></i> <span data-i18n="project_source_code">Source Code</span>
                                 </a>
                             </div>
                         </div>
@@ -1173,8 +1220,8 @@
                             </div>
                         </div>
                         <div class="project-content" style="opacity: 1 !important;">
-                            <h3 class="text-xl font-bold mb-2">API Testing with PactumJS</h3>
-                            <p class="mb-4" style="color: var(--text-secondary);">API test automation for Automation Exercise using PactumJS.</p>
+                            <h3 class="text-xl font-bold mb-2" data-i18n="project6_title">API Testing with PactumJS</h3>
+                            <p class="mb-4" style="color: var(--text-secondary);" data-i18n="project6_desc">API test automation for Automation Exercise using PactumJS.</p>
                             
                             <div class="flex flex-wrap mb-4">
                                 <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2 mb-2">JavaScript</span>
@@ -1184,10 +1231,10 @@
                             
                             <div class="flex justify-between">
                                 <a href="#" class="text-sm font-medium hover:underline" style="color: var(--primary);">
-                                    <i class="fas fa-file-code mr-1"></i> Documentation
+                                    <i class="fas fa-file-code mr-1"></i> <span data-i18n="project_documentation">Documentation</span>
                                 </a>
                                 <a href="https://github.com/enokjanuario/qa.automationexercise-api.pactumjs" target="_blank" class="text-sm font-medium hover:underline" style="color: var(--primary);">
-                                    <i class="fab fa-github mr-1"></i> Source Code
+                                    <i class="fab fa-github mr-1"></i> <span data-i18n="project_source_code">Source Code</span>
                                 </a>
                             </div>
                         </div>
@@ -1201,11 +1248,11 @@
     <section id="contact" class="py-20" style="background-color: var(--background);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="section-card">
-                <h2 class="text-3xl font-bold mb-8 text-center">Get In Touch</h2>
+                <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="contact_title">Get In Touch</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                        <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+                        <h3 class="text-xl font-bold mb-4" data-i18n="contact_info">Contact Information</h3>
                         
                         <div class="space-y-4">
                             <div class="flex items-center">
@@ -1213,8 +1260,8 @@
                                     <i class="fas fa-map-marker-alt text-white"></i>
                                 </div>
                                 <div class="ml-4">
-                                    <p class="text-sm font-medium" style="color: var(--text-secondary);">Location</p>
-                                    <p class="text-lg">Belo Horizonte, Minas Gerais, Brazil</p>
+                                    <p class="text-sm font-medium" style="color: var(--text-secondary);" data-i18n="contact_location">Location</p>
+                                    <p class="text-lg" data-i18n="contact_location_value">Belo Horizonte, Minas Gerais, Brazil</p>
                                 </div>
                             </div>
                             
@@ -1223,7 +1270,7 @@
                                     <i class="fas fa-envelope text-white"></i>
                                 </div>
                                 <div class="ml-4">
-                                    <p class="text-sm font-medium" style="color: var(--text-secondary);">Email</p>
+                                    <p class="text-sm font-medium" style="color: var(--text-secondary);" data-i18n="contact_email">Email</p>
                                     <a href="mailto:ejrocha07@gmail.com" class="text-lg hover:underline">ejrocha07@gmail.com</a>
                                 </div>
                             </div>
@@ -1233,14 +1280,14 @@
                                     <i class="fas fa-phone text-white"></i>
                                 </div>
                                 <div class="ml-4">
-                                    <p class="text-sm font-medium" style="color: var(--text-secondary);">Phone</p>
+                                    <p class="text-sm font-medium" style="color: var(--text-secondary);" data-i18n="contact_phone">Phone</p>
                                     <p class="text-lg">+55 31 99150-8940</p>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="mt-8">
-                            <h4 class="text-lg font-semibold mb-2">Connect with me</h4>
+                            <h4 class="text-lg font-semibold mb-2" data-i18n="contact_connect">Connect with me</h4>
                             <div class="flex space-x-4">
                                 <a href="https://linkedin.com/in/enokjrocha" target="_blank" class="h-10 w-10 flex items-center justify-center rounded-full border hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-colors duration-300" style="border-color: var(--border-color); color: var(--text-primary);">
                                     <i class="fab fa-linkedin-in"></i>
@@ -1256,24 +1303,24 @@
                     </div>
                     
                     <div>
-                        <h3 class="text-xl font-bold mb-4">Send Me a Message</h3>
+                        <h3 class="text-xl font-bold mb-4" data-i18n="contact_send_message">Send Me a Message</h3>
                         
                         <form id="contact-form">
                             <div class="mb-4">
-                                <input type="text" placeholder="Your Name" class="form-input" required>
+                                <input type="text" placeholder="Your Name" data-i18n="contact_form_name" class="form-input" required>
                             </div>
                             <div class="mb-4">
-                                <input type="email" placeholder="Your Email" class="form-input" required>
+                                <input type="email" placeholder="Your Email" data-i18n="contact_form_email" class="form-input" required>
                             </div>
                             <div class="mb-4">
-                                <input type="text" placeholder="Subject" class="form-input" required>
+                                <input type="text" placeholder="Subject" data-i18n="contact_form_subject" class="form-input" required>
                             </div>
                             <div class="mb-4">
-                                <textarea placeholder="Your Message" class="form-input" rows="5" required></textarea>
+                                <textarea placeholder="Your Message" data-i18n="contact_form_message" class="form-input" rows="5" required></textarea>
                             </div>
                             
                             <button type="submit" class="animated-btn w-full">
-                                <i class="fas fa-paper-plane mr-2"></i> Send Message
+                                <i class="fas fa-paper-plane mr-2"></i> <span data-i18n="contact_form_submit">Send Message</span>
                             </button>
                         </form>
                     </div>
@@ -1285,8 +1332,8 @@
     <!-- Footer -->
     <footer class="py-8" style="background-color: var(--background);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p style="color: var(--text-secondary);">© 2024 Enok Rocha. All rights reserved.</p>
-            <p class="mt-2" style="color: var(--text-secondary);">Quality-driven Test Automation Analyst</p>
+            <p style="color: var(--text-secondary);" data-i18n="footer_rights">© 2024 Enok Rocha. All rights reserved.</p>
+            <p class="mt-2" style="color: var(--text-secondary);" data-i18n="footer_subtitle">Quality-driven Test Automation Analyst</p>
         </div>
     </footer>
     
@@ -1961,5 +2008,8 @@
         window.addEventListener('resize', forceElementsVisibility);
     });
     </script>
+    
+    <!-- Internationalization -->
+    <script src="i18n.js"></script>
 </body>
 </html>

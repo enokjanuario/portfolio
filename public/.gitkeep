@@ -1,0 +1,57 @@
+# Public assets directory
+
+Place your images, fonts, and other static files here.
+
+## Recommended Structure
+
+```
+public/
+├── images/
+│   ├── profile.jpg          # Your profile photo
+│   └── projects/            # Project screenshots
+├── favicon-16x16.png        # Small favicon
+├── favicon-32x32.png        # Medium favicon
+├── apple-touch-icon.png     # Apple touch icon (180x180)
+└── resume.pdf               # Your resume
+```
+
+## Creating Favicons (Optional)
+
+You can use tools like:
+- [Favicon.io](https://favicon.io) - Generate from text/image
+- [RealFaviconGenerator](https://realfavicongenerator.net) - Complete favicon package
+
+Or just use emoji as favicon temporarily:
+1. Go to https://favicon.io/emoji-favicons/
+2. Download your favorite emoji favicon
+3. Extract and place PNG files in `/public`
+
+## Image Optimization
+
+Next.js automatically optimizes images when using the `next/image` component:
+
+- Automatic WebP conversion
+- Responsive images
+- Lazy loading
+- Blur placeholder
+
+## Adding New Assets
+
+1. Place files in appropriate subdirectory
+2. Reference them in components:
+   ```tsx
+   import Image from 'next/image'
+   
+   <Image src="/images/profile.jpg" alt="..." width={400} height={400} />
+   ```
+
+3. For non-image files (PDFs, etc.):
+   ```tsx
+   <a href="/resume.pdf" download>Download Resume</a>
+   ```
+
+## Note
+
+The favicon configuration is in `app/layout.tsx`. If you don't add favicon files,
+the browser will use its default icon (which is fine for development).
+
